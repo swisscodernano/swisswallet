@@ -1,0 +1,191 @@
+name: SwissWallet Release Build
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on version tags (v2.0.0, v2.1.0, etc.)
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  build-macos:
+    name: Build macOS (ARM64 + x64)
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build macOS packages
+        run: |
+          chmod +x ./Contrib/build-macos.sh
+          ./Contrib/build-macos.sh
+
+      - name: Upload macOS artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: swisswallet-macos
+          path: ./packages/SwissWallet-*-osx-*.zip
+          compression-level: 0
+          if-no-files-found: error
+
+  build-windows:
+    name: Build Windows (x64)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build Windows package
+        shell: bash
+        run: |
+          chmod +x ./Contrib/build-windows.sh
+          ./Contrib/build-windows.sh
+
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: swisswallet-windows
+          path: ./packages/SwissWallet-*-win-x64.zip
+          compression-level: 0
+          if-no-files-found: error
+
+  build-linux:
+    name: Build Linux (x64 + deb)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build Linux packages
+        run: |
+          chmod +x ./Contrib/build-linux.sh
+          ./Contrib/build-linux.sh
+
+      - name: Upload Linux artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: swisswallet-linux
+          path: |
+            ./packages/SwissWallet-*-linux-x64.zip
+            ./packages/SwissWallet-*-linux-x64.tar.gz
+            ./packages/SwissWallet-*.deb
+          compression-level: 0
+          if-no-files-found: error
+
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [build-macos, build-windows, build-linux]
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download macOS artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: swisswallet-macos
+          path: ./release-packages
+
+      - name: Download Windows artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: swisswallet-windows
+          path: ./release-packages
+
+      - name: Download Linux artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: swisswallet-linux
+          path: ./release-packages
+
+      - name: List all packages
+        run: ls -lh ./release-packages
+
+      - name: Create Release Notes
+        run: |
+          cat > RELEASE_NOTES.md << 'EOF'
+          # 🇨🇭 SwissWallet Release
+
+          ## Swiss Privacy-First Bitcoin Wallet
+
+          ### 🔒 Security Features
+          - **Hardcoded Swiss Coordinators** - Cannot be changed by users
+          - **Tor-First Connection** - Privacy by default with onion service priority
+          - **Swiss Security Standards** - Built with Swiss precision and security
+
+          ### 📦 Downloads
+
+          **macOS:**
+          - ARM64 (Apple Silicon): `SwissWallet-*-osx-arm64.zip`
+          - x64 (Intel Mac): `SwissWallet-*-osx-x64.zip`
+
+          **Windows:**
+          - x64: `SwissWallet-*-win-x64.zip`
+
+          **Linux:**
+          - x64 ZIP: `SwissWallet-*-linux-x64.zip`
+          - x64 TAR.GZ: `SwissWallet-*-linux-x64.tar.gz`
+          - Debian Package: `SwissWallet-*.deb`
+
+          ### 🚀 Installation
+
+          **macOS:**
+          1. Download the appropriate ZIP for your Mac (ARM64 or x64)
+          2. Extract the ZIP file
+          3. Move `SwissWallet.app` to Applications folder
+          4. Right-click → Open (first time only to bypass Gatekeeper)
+
+          **Windows:**
+          1. Download `SwissWallet-*-win-x64.zip`
+          2. Extract to desired location
+          3. Run `swisswallet.exe`
+
+          **Linux:**
+          - **Debian/Ubuntu:** `sudo dpkg -i SwissWallet-*.deb`
+          - **Other distros:** Extract ZIP/TAR.GZ and run `./swisswallet`
+
+          ### 🌐 Coordinators
+          - **Primary (Tor):** `rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion`
+          - **Fallback (HTTPS):** `https://wasabi.swisscoordinator.app`
+
+          ### 📋 Requirements
+          - macOS 11+ (Big Sur or later)
+          - Windows 10/11 (64-bit)
+          - Linux x64 with glibc 2.31+
+
+          ---
+
+          🇨🇭 **Built with Swiss precision for Bitcoin privacy**
+          EOF
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: SwissWallet ${{ github.ref_name }}
+          body_path: RELEASE_NOTES.md
+          files: ./release-packages/*
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
