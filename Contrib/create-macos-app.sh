@@ -47,6 +47,28 @@ mkdir -p "$RESOURCES_DIR"
 echo "   📦 Copying binaries..."
 cp -R "$BUILD_DIR/$PLATFORM/"* "$MACOS_DIR/"
 
+# Rename the actual binary
+mv "$MACOS_DIR/swisswallet" "$MACOS_DIR/swisswallet-bin"
+
+# Create launcher script
+echo "   📝 Creating launcher script..."
+cat > "$MACOS_DIR/swisswallet" << 'LAUNCHER_EOF'
+#!/bin/bash
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$DIR"
+
+# Set environment for Avalonia on macOS
+export DYLD_LIBRARY_PATH="$DIR:$DYLD_LIBRARY_PATH"
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
+# Launch the actual binary
+exec "$DIR/swisswallet-bin" "$@"
+LAUNCHER_EOF
+
+chmod +x "$MACOS_DIR/swisswallet"
+chmod +x "$MACOS_DIR/swisswallet-bin"
+chmod +x "$MACOS_DIR/swisswalletd"
+
 # Create Info.plist
 echo "   📝 Creating Info.plist..."
 cat > "$CONTENTS_DIR/Info.plist" << EOF
@@ -103,9 +125,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 chmod +x "$SCRIPT_DIR/create-swiss-icon.sh"
 export ICONSET_DIR
 "$SCRIPT_DIR/create-swiss-icon.sh" "$RESOURCES_DIR" || echo "   ⚠️  Icon creation skipped (will use default)"
-
-# Make executable
-chmod +x "$MACOS_DIR/swisswallet"
 
 # Create PkgInfo
 echo "APPL????" > "$CONTENTS_DIR/PkgInfo"
