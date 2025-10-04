@@ -26,8 +26,8 @@ public class SwissCoordinatorHttpClientFactory : IHttpClientFactory
 	// Swiss Coordinator Configuration
 	private readonly CoordinatorInfo[] _swissCoordinators = new[]
 	{
-		new CoordinatorInfo(Constants.SwissCoordinatorOnion, CoordinatorType.OnionService, Priority: 1),
-		new CoordinatorInfo(Constants.SwissCoordinatorClearnet, CoordinatorType.Clearnet, Priority: 2)
+		new CoordinatorInfo(new Uri(Constants.SwissCoordinatorOnion), CoordinatorType.OnionService, Priority: 1),
+		new CoordinatorInfo(new Uri(Constants.SwissCoordinatorClearnet), CoordinatorType.Clearnet, Priority: 2)
 	};
 
 	public SwissCoordinatorHttpClientFactory(HttpClientFactory internalHttpClientFactory)
