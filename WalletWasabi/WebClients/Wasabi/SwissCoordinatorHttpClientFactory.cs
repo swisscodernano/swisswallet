@@ -18,8 +18,8 @@ public class SwissCoordinatorHttpClientFactory : IHttpClientFactory
 {
 	private readonly HttpClientFactory _internalHttpClientFactory;
 	private readonly object _lock = new();
-	private volatile CoordinatorInfo _currentCoordinator;
-	private volatile DateTime _lastFailoverCheck = DateTime.MinValue;
+	private CoordinatorInfo _currentCoordinator;
+	private DateTime _lastFailoverCheck = DateTime.MinValue;
 	private readonly TimeSpan _healthCheckInterval = TimeSpan.FromMinutes(2);
 	private readonly TimeSpan _failoverCooldown = TimeSpan.FromSeconds(30);
 

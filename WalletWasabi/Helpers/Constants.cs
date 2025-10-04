@@ -83,16 +83,8 @@ public static class Constants
 	public const string AlphaNumericCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	public const string CapitalAlphaNumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-	/// <summary>Executable file name of Wasabi Wallet Daemon application (without extension).</summary>
-	public const string DaemonExecutableName = $"{ExecutableName}d";
-
-	/// <summary>Executable file name of Wasabi Wallet UI application (without extension).</summary>
-	public const string ExecutableName = "wassabee";
-
-	/// <summary>Plist name, only for MacOs. Starts Wasabi with -startsilent argument.</summary>
-	public const string SilentPlistName = "com.wasabiwallet.startup.plist";
-
-	public const string AppName = "Wasabi Wallet";
+	/// <summary>Plist name, only for MacOs. Starts SwissWallet with -startsilent argument.</summary>
+	public const string SilentPlistName = "com.swisswallet.startup.plist";
 
 	public static readonly string DefaultMainNetBitcoinRpcUri = $"http://localhost:{DefaultMainNetBitcoinRpcPort}";
 	public static readonly string DefaultTestNetBitcoinRpcUri = $"http://localhost:{DefaultTestNetBitcoinRpcPort}";
