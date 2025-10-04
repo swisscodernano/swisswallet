@@ -97,9 +97,12 @@ cat > "$CONTENTS_DIR/Info.plist" << EOF
 </plist>
 EOF
 
-# Create icon (using placeholder for now - will need proper .icns file)
-# TODO: Add proper SwissWallet.icns icon file
-echo "   🎨 Icon setup (using default for now)..."
+# Create Swiss icon
+echo "   🎨 Creating Swiss icon..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+chmod +x "$SCRIPT_DIR/create-swiss-icon.sh"
+export ICONSET_DIR
+"$SCRIPT_DIR/create-swiss-icon.sh" "$RESOURCES_DIR" || echo "   ⚠️  Icon creation skipped (will use default)"
 
 # Make executable
 chmod +x "$MACOS_DIR/swisswallet"
@@ -132,6 +135,13 @@ hdiutil create -volname "$APP_NAME" \
     -srcfolder "$TEMP_DMG_DIR" \
     -ov -format UDZO \
     "$DMG_PATH"
+
+# Remove quarantine attributes to avoid "damaged" error
+echo "   🔓 Removing quarantine attributes..."
+xattr -cr "$TEMP_DMG_DIR/$APP_BUNDLE" 2>/dev/null || true
+if [ -f "$DMG_PATH" ]; then
+    xattr -cr "$DMG_PATH" 2>/dev/null || true
+fi
 
 # Clean up
 rm -rf "$TEMP_DMG_DIR"
