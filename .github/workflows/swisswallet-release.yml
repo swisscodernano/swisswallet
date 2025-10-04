@@ -20,6 +20,9 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Install ImageMagick for icon creation
+        run: brew install imagemagick
+
       - name: Build macOS packages
         run: |
           chmod +x ./Contrib/build-macos.sh

@@ -3,8 +3,7 @@
 #------------------------------------------------------------------------------------#
 #  create-swiss-icon.sh                                                              #
 #                                                                                    #
-#  Creates a Swiss-themed icon for SwissWallet                                       #
-#  Generates .icns file from SVG/PNG source                                          #
+#  Creates a Swiss-themed icon for SwissWallet using native macOS tools             #
 #------------------------------------------------------------------------------------#
 
 set -e
@@ -26,15 +25,28 @@ ICNS_FILE="$RESOURCES_DIR/${ICON_NAME}.icns"
 # Create iconset directory
 mkdir -p "$ICONSET_DIR"
 
-# Create a Swiss-themed icon using ImageMagick/sips
-# We'll create a simple but elegant Swiss cross on shield design
+# Use ImageMagick if available, otherwise create simple colored squares
+if command -v convert &> /dev/null; then
+    echo "   🖼️  Creating Swiss cross icon with ImageMagick..."
 
-# Generate base PNG if sips is available (macOS)
-if command -v sips &> /dev/null; then
-    echo "   🖼️  Generating Swiss icon with native tools..."
+    # Create Swiss flag icon with ImageMagick
+    for size in 16 32 64 128 256 512 1024; do
+        convert -size ${size}x${size} xc:'#DC143C' \
+                -fill white \
+                -draw "rectangle $((size*2/5)),$((size/5)) $((size*3/5)),$((size*4/5))" \
+                -draw "rectangle $((size/5)),$((size*2/5)) $((size*4/5)),$((size*3/5))" \
+                "$ICONSET_DIR/icon_${size}x${size}.png"
 
-    # Create temporary base image with Swiss flag colors
-    # Red background (#FF0000) with white cross
+        # Create @2x versions
+        if [ $size -le 512 ]; then
+            cp "$ICONSET_DIR/icon_${size}x${size}.png" "$ICONSET_DIR/icon_$((size/2))x$((size/2))@2x.png"
+        fi
+    done
+
+elif command -v sips &> /dev/null; then
+    echo "   🖼️  Creating Swiss icon with sips..."
+
+    # Fallback: create simple red squares with sips
     python3 << 'EOF'
 from PIL import Image, ImageDraw
 import os
