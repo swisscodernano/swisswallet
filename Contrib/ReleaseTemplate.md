@@ -19,7 +19,7 @@ For a detailed installation guide, including **signature verification**, see [th
 
 ## Documentation
 :spider_web: [Website](https://wasabiwallet.io)
-:onion: [Tor onion site](http://wasabiukrxmkdgve5kynjztuovbg43uxcbcxn6y2okcrsg7gb6jdmbad.onion/)
+:onion: [Tor onion site](http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion/)
 :orange_book: [Documentation](https://docs.wasabiwallet.io)
 :grey_question: [FAQ](https://github.com/WalletWasabi/WalletWasabi/discussions/categories/faq)
 

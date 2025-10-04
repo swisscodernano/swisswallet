@@ -13,8 +13,17 @@ public static class Constants
 	public const string TestnetIndexerUri = "https://api.wasabiwallet.co/";
 	public const string RegTestIndexerUri = "http://localhost:37127/";
 
-	public const string CoordinatorUri = "";
-	public const string TestnetCoordinatorUri = "";
+	public const string CoordinatorUri = "https://wasabi.swisscoordinator.app";
+	public const string TestnetCoordinatorUri = "https://wasabi.swisscoordinator.app";
+
+	// Swiss Coordinator Configuration
+	public const string SwissCoordinatorOnion = "http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion";
+	public const string SwissCoordinatorClearnet = "https://wasabi.swisscoordinator.app";
+
+	// Swiss Application Identity
+	public const string AppName = "SwissWallet";
+	public const string ExecutableName = "swisswallet";
+	public const string DaemonExecutableName = "swisswalletd";
 	public const string RegTestCoordinatorUri = "http://localhost:37126/";
 
 	public const string WabiSabiFallBackCoordinatorExtPubKey = "xpub6C13JhXzjAhVRgeTcRSWqKEPe1vHi3Tmh2K9PN1cZaZFVjjSaj76y5NNyqYjc2bugj64LVDFYu8NZWtJsXNYKFb9J94nehLAPAKqKiXcebC";

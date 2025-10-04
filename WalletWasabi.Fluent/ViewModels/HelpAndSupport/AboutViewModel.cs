@@ -113,7 +113,7 @@ public partial class AboutViewModel : RoutableViewModel
 
 	public static string ClearnetLink => "https://wasabiwallet.io/";
 
-	public static string TorLink => "http://wasabiukrxmkdgve5kynjztuovbg43uxcbcxn6y2okcrsg7gb6jdmbad.onion";
+	public static string TorLink => "http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion";
 
 	public static string SourceCodeLink => "https://github.com/WalletWasabi/WalletWasabi/";
 

@@ -202,8 +202,14 @@ public class Config
 	{
 		try
 		{
-			coordinatorUri = new Uri(CoordinatorUri);
-			return coordinatorUri.Host != "api.wasabiwallet.io";
+			// Swiss Security: Force Swiss coordinators only
+			// Priority: Onion service → HTTPS fallback
+			string swissCoordinatorUri = UseTor != TorMode.Disabled
+				? Constants.SwissCoordinatorOnion
+				: Constants.SwissCoordinatorClearnet;
+
+			coordinatorUri = new Uri(swissCoordinatorUri);
+			return true;
 		}
 		catch (Exception e) when (e is UriFormatException or ArgumentException or NotSupportedNetworkException)
 		{
