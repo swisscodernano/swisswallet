@@ -29,7 +29,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: swisswallet-macos
-          path: ./packages/SwissWallet-*-macOS-*.zip
+          path: |
+            ./packages/SwissWallet-*-macOS-*.dmg
+            ./packages/SwissWallet-*-macOS-*.zip
           compression-level: 0
           if-no-files-found: error
 
@@ -136,8 +138,9 @@ jobs:
           ### 📦 Downloads
 
           **macOS:**
-          - ARM64 (Apple Silicon): `SwissWallet-*-osx-arm64.zip`
-          - x64 (Intel Mac): `SwissWallet-*-osx-x64.zip`
+          - ARM64 (Apple Silicon): `SwissWallet-*-macOS-arm64.dmg` 🍎 Recommended
+          - x64 (Intel Mac): `SwissWallet-*-macOS-x64.dmg` 🍎 Recommended
+          - Alternative ZIP bundles also available
 
           **Windows:**
           - x64: `SwissWallet-*-win-x64.zip`
@@ -150,10 +153,11 @@ jobs:
           ### 🚀 Installation
 
           **macOS:**
-          1. Download the appropriate ZIP for your Mac (ARM64 or x64)
-          2. Extract the ZIP file
-          3. Move `SwissWallet.app` to Applications folder
-          4. Right-click → Open (first time only to bypass Gatekeeper)
+          1. Download the `.dmg` file for your Mac (ARM64 for M1/M2/M3, x64 for Intel)
+          2. Open the `.dmg` file
+          3. Drag `SwissWallet.app` to the Applications folder
+          4. Eject the disk image
+          5. First launch: Right-click SwissWallet.app → Open (to bypass Gatekeeper)
 
           **Windows:**
           1. Download `SwissWallet-*-win-x64.zip`

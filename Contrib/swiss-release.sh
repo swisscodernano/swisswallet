@@ -184,17 +184,28 @@ for PLATFORM in "${PLATFORMS[@]}"; do
     ALTER_PLATFORM="macOS${PLATFORM:3}"
   fi
 
-  # Create compressed package files (.zip and .tar.gz)
+  # Create platform-specific packages
   PACKAGE_FILE_NAME=$PACKAGE_FILE_NAME_PREFIX-$ALTER_PLATFORM
-  echo "   📁 Creating package: $PACKAGE_FILE_NAME"
 
-  if [[ "${PLATFORM_PREFIX}" == "lin" ]]; then
+  if [[ "${PLATFORM_PREFIX}" == "osx" ]]; then
+    # macOS: Create .app bundle and .dmg installer
+    echo "   📦 Creating macOS .app bundle and .dmg..."
+    chmod +x "$ROOT_DIR/Contrib/create-macos-app.sh"
+    "$ROOT_DIR/Contrib/create-macos-app.sh" "$PLATFORM" "$VERSION" "$BUILD_DIR" "$PACKAGES_DIR"
+  elif [[ "${PLATFORM_PREFIX}" == "lin" ]]; then
+    # Linux: Create .tar.gz and .zip
+    echo "   📁 Creating package: $PACKAGE_FILE_NAME"
     tar -pczvf $PACKAGES_DIR/$PACKAGE_FILE_NAME.tar.gz -C "$BUILD_DIR" $(basename "$OUTPUT_DIR")
+    pushd "$OUTPUT_DIR" || exit
+    $ZIP "$PACKAGES_DIR/$PACKAGE_FILE_NAME.zip" .
+    popd || exit
+  else
+    # Windows: Create .zip only
+    echo "   📁 Creating package: $PACKAGE_FILE_NAME"
+    pushd "$OUTPUT_DIR" || exit
+    $ZIP "$PACKAGES_DIR/$PACKAGE_FILE_NAME.zip" .
+    popd || exit
   fi
-
-  pushd "$OUTPUT_DIR" || exit
-  $ZIP "$PACKAGES_DIR/$PACKAGE_FILE_NAME.zip" .
-  popd || exit
 
   echo "   ✅ Completed $PLATFORM build"
 done
