@@ -9,13 +9,19 @@
              x:CompileBindings="True">
   <StackPanel Classes="settingsLayout">
 
-    <DockPanel ToolTip.Tip="The client will connect to this coordinator that will manage coinjoins.">
+    <!-- Swiss Coordinator Info Panel -->
+    <Border Background="#FFF5F5F5" BorderBrush="#FFDC143C" BorderThickness="2" CornerRadius="4" Padding="12" Margin="0,0,0,16">
+      <StackPanel>
+        <TextBlock Text="🇨🇭 Swiss Coordinator - Hardcoded for Security" FontWeight="Bold" Foreground="#FFDC143C" Margin="0,0,0,8"/>
+        <TextBlock Text="{Binding SwissCoordinatorInfo}" TextWrapping="Wrap" FontSize="12" Foreground="#FF666666"/>
+      </StackPanel>
+    </Border>
+
+    <DockPanel ToolTip.Tip="🔒 Coordinator is hardcoded for Swiss security standards and cannot be changed.">
       <TextBlock Text="Coordinator URI" />
-      <TextBox Name="CoordinatorTextBox" Text="{Binding CoordinatorUri}">
+      <TextBox Name="CoordinatorTextBox" Text="{Binding CoordinatorUri}" IsReadOnly="True" Background="#FFEEEEEE">
         <Interaction.Behaviors>
           <TextBoxAutoSelectTextBehavior />
-          <WhitespacePasteRemovalBehavior />
-          <WhitespaceInputRemovalBehavior />
         </Interaction.Behaviors>
       </TextBox>
     </DockPanel>

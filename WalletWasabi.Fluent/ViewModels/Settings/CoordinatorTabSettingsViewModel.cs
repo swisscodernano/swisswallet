@@ -13,12 +13,12 @@ namespace WalletWasabi.Fluent.ViewModels.Settings;
 [AppLifetime]
 [NavigationMetaData(
 	Title = "Coordinator",
-	Caption = "Manage Coordinator settings",
+	Caption = "🇨🇭 Swiss Coordinator - Hardcoded for Security",
 	Order = 2,
 	Category = "Settings",
 	Keywords =
 	[
-		"Settings", "Coordinator", "URI", "Max", "Coinjoin", "Mining", "Fee", "Rate", "Min", "Input", "Count"
+		"Settings", "Coordinator", "URI", "Max", "Coinjoin", "Mining", "Fee", "Rate", "Min", "Input", "Count", "Swiss", "Security"
 	],
 	IconName = "settings_bitcoin_regular")]
 public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
@@ -26,12 +26,20 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 	[AutoNotify] private string _coordinatorUri;
 	[AutoNotify] private string _maxCoinJoinMiningFeeRate;
 	[AutoNotify] private string _absoluteMinInputCount;
+	[AutoNotify] private string _swissCoordinatorInfo;
 
 	public CoordinatorTabSettingsViewModel(IApplicationSettings settings)
 	{
 		Settings = settings;
 
-		this.ValidateProperty(x => x.CoordinatorUri, ValidateCoordinatorUri);
+		// SwissWallet: Coordinator is hardcoded and cannot be changed
+		_swissCoordinatorInfo = "🔒 SwissWallet uses hardcoded Swiss coordinators for maximum security.\n" +
+		                        "Primary (Tor): rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion\n" +
+		                        "Fallback (HTTPS): wasabi.swisscoordinator.app\n\n" +
+		                        "This setting cannot be changed to ensure Swiss privacy standards.";
+
+		// Note: Coordinator URI validation disabled for SwissWallet as it's hardcoded
+		// this.ValidateProperty(x => x.CoordinatorUri, ValidateCoordinatorUri);
 		this.ValidateProperty(x => x.MaxCoinJoinMiningFeeRate, ValidateMaxCoinJoinMiningFeeRate);
 		this.ValidateProperty(x => x.AbsoluteMinInputCount, ValidateAbsoluteMinInputCount);
 
@@ -54,7 +62,10 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 			.Subscribe(x => AbsoluteMinInputCount = Settings.AbsoluteMinInputCount);
 	}
 
-	public bool IsReadOnly => Settings.IsOverridden;
+	// SwissWallet: Coordinator is always read-only (hardcoded for security)
+	public bool IsReadOnly => true;
+
+	public bool IsCoordinatorLocked => true; // Swiss feature: coordinator cannot be changed
 
 	public IApplicationSettings Settings { get; }
 
