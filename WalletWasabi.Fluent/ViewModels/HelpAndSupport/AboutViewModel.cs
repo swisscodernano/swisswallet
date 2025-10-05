@@ -33,6 +33,27 @@ public partial class AboutViewModel : RoutableViewModel
 			{
 				new LinkViewModel(UiContext)
 				{
+					Link = SwissCoordinatorLink,
+					Description = "🇨🇭 Swiss Coordinator (Official)",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = CoordinatorTorLink,
+					Description = "Coordinator (Tor Onion)",
+					IsClickable = false
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = CoordinatorHttpsLink,
+					Description = "Coordinator (HTTPS)",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
 					Link = DocsLink,
 					Description = "Documentation",
 					IsClickable = true
@@ -110,6 +131,12 @@ public partial class AboutViewModel : RoutableViewModel
 	public ICommand CopyLinkCommand { get; }
 
 	public Version ClientVersion => Constants.ClientVersion;
+
+	public static string SwissCoordinatorLink => "https://swisscoordinator.app";
+
+	public static string CoordinatorTorLink => "http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion";
+
+	public static string CoordinatorHttpsLink => "https://wasabi.swisscoordinator.app";
 
 	public static string ClearnetLink => "https://github.com/swisscodernano/swisswallet";
 
