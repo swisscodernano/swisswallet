@@ -35,7 +35,7 @@ public partial class TransactionHistoryItemViewModel : HistoryItemViewModelBase
 		catch (Exception ex)
 		{
 			Logger.LogError(ex);
-			UiContext.Navigate().To().ShowErrorDialog(ex.ToUserFriendlyString(), "Speed Up failed", "Wasabi could not initiate the transaction speed up process.");
+			UiContext.Navigate().To().ShowErrorDialog(ex.ToUserFriendlyString(), "Speed Up failed", "SwissWallet could not initiate the transaction speed up process.");
 		}
 	}
 
@@ -49,7 +49,7 @@ public partial class TransactionHistoryItemViewModel : HistoryItemViewModelBase
 		catch (Exception ex)
 		{
 			Logger.LogError(ex);
-			UiContext.Navigate().To().ShowErrorDialog(ex.ToUserFriendlyString(), "Cancel failed", "Wasabi could not initiate the cancelling process.");
+			UiContext.Navigate().To().ShowErrorDialog(ex.ToUserFriendlyString(), "Cancel failed", "SwissWallet could not initiate the cancelling process.");
 		}
 	}
 }

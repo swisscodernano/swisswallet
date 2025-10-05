@@ -126,7 +126,7 @@ public partial class TransactionPreviewViewModel : RoutableViewModel
 			catch (Exception ex)
 			{
 				Logger.LogError(ex);
-				await ShowErrorAsync("Transaction Export", ex.ToUserFriendlyString(), "Wasabi was unable to export the PSBT.");
+				await ShowErrorAsync("Transaction Export", ex.ToUserFriendlyString(), "SwissWallet was unable to export the PSBT.");
 			}
 
 			if (saved)
@@ -255,7 +255,7 @@ public partial class TransactionPreviewViewModel : RoutableViewModel
 			await ShowErrorAsync(
 				"Transaction Building",
 				"The transaction cannot be sent because its fee is more than the payment amount.",
-				"Wasabi was unable to create your transaction.");
+				"SwissWallet was unable to create your transaction.");
 
 			return null;
 		}
@@ -282,7 +282,7 @@ public partial class TransactionPreviewViewModel : RoutableViewModel
 			await ShowErrorAsync(
 				"Transaction Building",
 				"There are not enough funds to cover the transaction fee.",
-				"Wasabi was unable to create your transaction.");
+				"SwissWallet was unable to create your transaction.");
 
 			return null;
 		}
@@ -293,7 +293,7 @@ public partial class TransactionPreviewViewModel : RoutableViewModel
 			await ShowErrorAsync(
 				"Transaction Building",
 				ex.ToUserFriendlyString(),
-				"Wasabi was unable to create your transaction.");
+				"SwissWallet was unable to create your transaction.");
 
 			return null;
 		}
@@ -413,7 +413,7 @@ public partial class TransactionPreviewViewModel : RoutableViewModel
 			await ShowErrorAsync(
 				"Transaction",
 				ex.ToUserFriendlyString(),
-				"Wasabi was unable to send your transaction.");
+				"SwissWallet was unable to send your transaction.");
 		}
 		finally
 		{

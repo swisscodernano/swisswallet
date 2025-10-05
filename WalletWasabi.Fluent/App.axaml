@@ -34,12 +34,12 @@
   </Application.Styles>
   <NativeMenu.Menu>
     <NativeMenu>
-      <NativeMenuItem Header="About Wasabi Wallet" Command="{Binding AboutCommand}" />
+      <NativeMenuItem Header="About SwissWallet" Command="{Binding AboutCommand}" />
     </NativeMenu>
   </NativeMenu.Menu>
   <TrayIcon.Icons>
     <TrayIcons>
-      <TrayIcon Icon="/Assets/WasabiLogo.ico" Command="{Binding ShowCommand}" ToolTipText="Wasabi Wallet">
+      <TrayIcon Icon="/Assets/WasabiLogo.ico" Command="{Binding ShowCommand}" ToolTipText="SwissWallet">
         <!-- TODO: This is temporary workaround until https://github.com/WalletWasabi/WalletWasabi/issues/8151 is fixed. -->
         <!--<NativeMenu.Menu>
           <NativeMenu>

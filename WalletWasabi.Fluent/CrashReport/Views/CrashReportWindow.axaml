@@ -15,7 +15,7 @@
     <ContentArea EnableNext="True"
                           EnableCancel="True"
                           NextContent="Close"
-                          CancelContent="Restart Wasabi"
+                          CancelContent="Restart SwissWallet"
                           FocusNext="True"
                           Title="{Binding Title}"
                           Caption="{Binding Caption}"

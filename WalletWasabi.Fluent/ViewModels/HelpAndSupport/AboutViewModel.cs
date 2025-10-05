@@ -8,8 +8,8 @@ using WalletWasabi.Helpers;
 namespace WalletWasabi.Fluent.ViewModels.HelpAndSupport;
 
 [NavigationMetaData(
-	Title = "About Wasabi",
-	Caption = "Display Wasabi's current info",
+	Title = "About SwissWallet",
+	Caption = "Display SwissWallet's current info",
 	IconName = "info_regular",
 	Order = 4,
 	Category = "Help & Support",

@@ -158,7 +158,7 @@ public partial class RecoverMultiShareWalletViewModel : RoutableViewModel
 			catch (Exception ex)
 			{
 				Logger.LogError(ex);
-				await ShowErrorAsync(Title, ex.ToUserFriendlyString(), "Wasabi was unable to recover the wallet.");
+				await ShowErrorAsync(Title, ex.ToUserFriendlyString(), "SwissWallet was unable to recover the wallet.");
 			}
 
 		}

@@ -5,7 +5,7 @@ namespace WalletWasabi.Fluent.ViewModels.HelpAndSupport;
 
 [NavigationMetaData(
 	Title = "User Guide/Docs",
-	Caption = "Open Wasabi's documentation website",
+	Caption = "Open SwissWallet's documentation website",
 	Order = 2,
 	Category = "Help & Support",
 	Keywords = new[]

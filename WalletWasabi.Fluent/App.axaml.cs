@@ -27,7 +27,7 @@ public class App : Application
 
 	public App()
 	{
-		Name = "Wasabi Wallet";
+		Name = "SwissWallet";
 	}
 
 	public App(Func<Task> backendInitialiseAsync, bool startInBg) : this()
