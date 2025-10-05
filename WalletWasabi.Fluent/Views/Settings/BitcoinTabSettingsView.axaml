@@ -20,7 +20,7 @@
       <ToggleSwitch IsChecked="{Binding Settings.UseBitcoinRpc}" />
     </DockPanel>
     <DockPanel IsVisible="{Binding Settings.UseBitcoinRpc}"
-      ToolTip.Tip="Wasabi will download blocks from a full node you control.">
+      ToolTip.Tip="SwissWallet will download blocks from a full node you control.">
       <TextBlock Text="Bitcoin RPC Endpoint" />
         <TextBox Text="{Binding BitcoinRpcUri}">
           <Interaction.Behaviors>
@@ -33,7 +33,9 @@
     <DockPanel IsVisible="{Binding Settings.UseBitcoinRpc}">
       <TextBlock Text="Bitcoin RPC Credential String" />
       <TextBox Text="{Binding BitcoinRpcCredentialString}"
-               Watermark="(rpcuser:rpcpassword or cookie file)"/>
+               Watermark="(rpcuser:rpcpassword or cookie file)"
+               PasswordChar="●"
+               RevealPassword="False"/>
     </DockPanel>
 
     <DockPanel ToolTip.Tip="Payments (from others) below this value won't appear if you have already received coins to the same address.">
