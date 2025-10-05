@@ -73,14 +73,14 @@ We forked Wasabi Wallet to provide Swiss citizens (and privacy-conscious global 
 
 ## 📥 Download
 
-**Latest Release:** [v3.0.0](https://github.com/swisscodernano/swisswallet/releases/latest)
+**Latest Release:** [v2.0.0](https://github.com/swisscodernano/swisswallet-bitcoin/releases/latest)
 
 | Platform | Download |
 |----------|----------|
-| 🍎 **macOS ARM64** (M1/M2/M3) | [SwissWallet-macOS-arm64.dmg](https://github.com/swisscodernano/swisswallet/releases/latest) |
-| 🍎 **macOS x64** (Intel) | [SwissWallet-macOS-x64.dmg](https://github.com/swisscodernano/swisswallet/releases/latest) |
-| 🪟 **Windows x64** | [SwissWallet-win-x64.zip](https://github.com/swisscodernano/swisswallet/releases/latest) |
-| 🐧 **Linux x64** | [SwissWallet-linux-x64.tar.gz](https://github.com/swisscodernano/swisswallet/releases/latest) |
+| 🍎 **macOS ARM64** (M1/M2/M3) | [SwissWallet-macOS-arm64.dmg](https://github.com/swisscodernano/swisswallet-bitcoin/releases/latest) |
+| 🍎 **macOS x64** (Intel) | [SwissWallet-macOS-x64.dmg](https://github.com/swisscodernano/swisswallet-bitcoin/releases/latest) |
+| 🪟 **Windows x64** | [SwissWallet-win-x64.zip](https://github.com/swisscodernano/swisswallet-bitcoin/releases/latest) |
+| 🐧 **Linux x64** | [SwissWallet-linux-x64.tar.gz](https://github.com/swisscodernano/swisswallet-bitcoin/releases/latest) |
 
 **All releases include:**
 - Cryptographic signatures for verification
@@ -149,8 +149,8 @@ cd SwissWallet-linux-x64
 
 **Quick Build:**
 ```bash
-git clone https://github.com/swisscodernano/swisswallet.git
-cd swisswallet
+git clone https://github.com/swisscodernano/swisswallet-bitcoin.git
+cd swisswallet-bitcoin
 cd WalletWasabi.Fluent.Desktop
 dotnet build
 dotnet run
@@ -197,9 +197,9 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting.
 
 ## 🌐 Community
 
-- **Issues**: [Report bugs](https://github.com/swisscodernano/swisswallet/issues)
-- **Discussions**: [Ask questions](https://github.com/swisscodernano/swisswallet/discussions)
-- **Wiki**: [Documentation](https://github.com/swisscodernano/swisswallet/wiki)
+- **Issues**: [Report bugs](https://github.com/swisscodernano/swisswallet-bitcoin/issues)
+- **Discussions**: [Ask questions](https://github.com/swisscodernano/swisswallet-bitcoin/discussions)
+- **Wiki**: [Documentation](https://github.com/swisscodernano/swisswallet-bitcoin/wiki)
 
 ---
 
