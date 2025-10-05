@@ -49,7 +49,8 @@
 		<ProjectReference Include="..\WalletWasabi\WalletWasabi.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!-- Removed System.Globalization.Invariant to fix macOS launch issue -->
+	<!-- <ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
-	</ItemGroup>
+	</ItemGroup> -->
 </Project>
