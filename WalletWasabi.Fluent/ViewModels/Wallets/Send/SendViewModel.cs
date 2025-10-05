@@ -89,7 +89,7 @@ public partial class SendViewModel : RoutableViewModel
 
 		_suggestionLabels = new SuggestionLabelsViewModel(_walletModel, Intent.Send, 3);
 
-		_defaultLabel = _parameters.Donate ? "Wasabi team" : "";
+		_defaultLabel = _parameters.Donate ? "Open-source development" : "";
 
 		SetupCancel(enableCancel: true, enableCancelOnEscape: true, enableCancelOnPressed: true);
 
@@ -408,7 +408,7 @@ public partial class SendViewModel : RoutableViewModel
 		if (_parameters.Donate)
 		{
 			To = Constants.DonationAddress;
-			Caption = "Donate to The Wasabi Wallet Developers to continue maintaining the software";
+			Caption = "Support open-source Bitcoin development and privacy tools";
 			IsFixedAddress = true;
 			TryParseUrl(_to);
 		}

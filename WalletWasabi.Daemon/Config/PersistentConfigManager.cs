@@ -18,10 +18,10 @@ public static class PersistentConfigManager
 		UseTor : "Enabled",
 		TerminateTorOnExit : false,
 		TorBridges : [],
-		DownloadNewVersion : true,
-		UseBitcoinRpc : true,
-		BitcoinRpcCredentialString : "coordinator2025:Am1110201225Mm",
-		BitcoinRpcUri : "http://zsgvzm5llnnzzir2umhurggvzmggsiaakbypcixhw7vizdhos5al6tad.onion:8332",
+		DownloadNewVersion : false,  // SwissWallet: Disabled - use GitHub releases
+		UseBitcoinRpc : false,  // SwissWallet: Disabled by default for security
+		BitcoinRpcCredentialString : string.Empty,  // Configure via environment: SWISS_BTC_RPC_CREDS
+		BitcoinRpcUri : string.Empty,  // Configure via environment: SWISS_BTC_RPC_URI
 		JsonRpcServerEnabled : false,
 		JsonRpcUser : string.Empty,
 		JsonRpcPassword : string.Empty,
@@ -42,8 +42,6 @@ public static class PersistentConfigManager
 		Network = Network.TestNet,
 		IndexerUri = Constants.TestnetIndexerUri,
 		CoordinatorUri = Constants.TestnetCoordinatorUri,
-		BitcoinRpcCredentialString = "coordinator2025:Am1110201225Mm",
-		BitcoinRpcUri = "http://zsgvzm5llnnzzir2umhurggvzmggsiaakbypcixhw7vizdhos5al6tad.onion:48332",
 		JsonRpcServerEnabled = true,
 		AbsoluteMinInputCount = Constants.AbsoluteMinInputCount,
 	};

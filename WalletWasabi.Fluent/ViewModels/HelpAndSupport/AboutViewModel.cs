@@ -111,19 +111,19 @@ public partial class AboutViewModel : RoutableViewModel
 
 	public Version ClientVersion => Constants.ClientVersion;
 
-	public static string ClearnetLink => "https://wasabiwallet.io/";
+	public static string ClearnetLink => "https://github.com/swisscodernano/swisswallet";
 
 	public static string TorLink => "http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion";
 
-	public static string SourceCodeLink => "https://github.com/WalletWasabi/WalletWasabi/";
+	public static string SourceCodeLink => "https://github.com/swisscodernano/swisswallet";
 
-	public static string UserSupportLink => "https://github.com/WalletWasabi/WalletWasabi/discussions/5185";
+	public static string UserSupportLink => "https://github.com/swisscodernano/swisswallet/discussions";
 
-	public static string BugReportLink => "https://github.com/WalletWasabi/WalletWasabi/issues/new?template=bug-report.md";
+	public static string BugReportLink => "https://github.com/swisscodernano/swisswallet/issues/new";
 
-	public static string FAQLink => "https://docs.wasabiwallet.io/FAQ/";
+	public static string FAQLink => "https://github.com/swisscodernano/swisswallet/wiki";
 
-	public static string DocsLink => "https://docs.wasabiwallet.io/";
+	public static string DocsLink => "https://github.com/swisscodernano/swisswallet/wiki";
 
-	public static string LicenseLink => "https://github.com/WalletWasabi/WalletWasabi/blob/master/LICENSE.md";
+	public static string LicenseLink => "https://github.com/swisscodernano/swisswallet/blob/master/LICENSE.md";
 }
