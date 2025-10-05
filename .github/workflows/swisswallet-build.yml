@@ -1,0 +1,87 @@
+name: SwissWallet Build (Test)
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  test-build-macos:
+    name: Test Build - macOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Test build Desktop app
+        run: |
+          cd WalletWasabi.Fluent.Desktop
+          dotnet build --configuration Release
+
+      - name: Upload macOS build artifact (for testing)
+        uses: actions/upload-artifact@v4
+        with:
+          name: swisswallet-macos-test-build
+          path: WalletWasabi.Fluent.Desktop/bin/Release/net8.0/
+          retention-days: 7
+
+  test-build-windows:
+    name: Test Build - Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Test build Desktop app
+        run: |
+          cd WalletWasabi.Fluent.Desktop
+          dotnet build --configuration Release
+
+  test-build-linux:
+    name: Test Build - Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Test build Desktop app
+        run: |
+          cd WalletWasabi.Fluent.Desktop
+          dotnet build --configuration Release
+
+  run-tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run unit tests
+        run: dotnet test WalletWasabi.Tests/WalletWasabi.Tests.csproj --configuration Release --verbosity minimal

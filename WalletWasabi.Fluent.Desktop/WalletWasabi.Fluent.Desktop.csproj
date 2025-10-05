@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputType>WinExe</OutputType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+		<NoWarn>1701;1702;1705;1591;1573;CA1031;CA1822</NoWarn>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+		<PathMap>$(MSBuildProjectDirectory)\=WalletWasabi.Fluent.Desktop</PathMap>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Authors>SwissWallet Contributors (based on zkSNACKs Ltd work)</Authors>
+		<Company>SwissWallet Project</Company>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<AssemblyTitle>SwissWallet</AssemblyTitle>
+		<Description>
+			Swiss-hardened Bitcoin privacy wallet with Tor-first connectivity. Fork of Wasabi Wallet with Swiss coordinators and enhanced security focus.
+		</Description>
+		<Copyright>MIT</Copyright>
+		<PackageTags>bitcoin-wallet;privacy;bitcoin;dotnet;nbitcoin;cross-platform;wallet;wabisabi;coinjoin;tor;swiss;sovereignty</PackageTags>
+		<PackageProjectUrl>https://github.com/swisswallet/swisswallet/</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/swisswallet/swisswallet/blob/master/LICENSE.md</PackageLicenseUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/swisswallet/swisswallet/</RepositoryUrl>
+		<ApplicationIcon>Assets\SwissWallet.ico</ApplicationIcon>
+		<PackageIcon>Assets\SwissWallet.ico</PackageIcon>
+		<Product>SwissWallet</Product>
+		<!-- owners is not supported in MSBuild -->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia.Desktop" />
+		<PackageReference Include="Avalonia.ReactiveUI" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\WalletWasabi.Fluent\WalletWasabi.Fluent.csproj" />
+		<ProjectReference Include="..\WalletWasabi\WalletWasabi.csproj" />
+	</ItemGroup>
+
+	<!-- Removed System.Globalization.Invariant to fix macOS launch issue -->
+	<!-- <ItemGroup>
+		<RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
+	</ItemGroup> -->
+</Project>

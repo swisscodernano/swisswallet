@@ -1,0 +1,97 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <!--
+        SwissWallet Theme
+        Applies Swiss color palette to the application while maintaining compatibility
+        with the existing theme system. Colors based on official Swiss flag colors.
+      -->
+
+      <!-- Primary Swiss Red Accent Color (Official Swiss Flag Red: Pantone 485 C) -->
+      <Color x:Key="SystemAccentColor">#FFDC143C</Color>
+
+      <!-- Swiss Red Variants (Lighter shades for hover states) -->
+      <Color x:Key="SystemAccentColorLight1">#FFE5395A</Color>
+      <Color x:Key="SystemAccentColorLight2">#FFEE5F78</Color>
+      <Color x:Key="SystemAccentColorLight3">#FFF78496</Color>
+
+      <!-- Swiss Red Variants (Darker shades for pressed states) -->
+      <Color x:Key="SystemAccentColorDark1">#FFC61237</Color>
+      <Color x:Key="SystemAccentColorDark2">#FFB01032</Color>
+
+      <!-- Swiss Gold for highlighting and special UI elements -->
+      <Color x:Key="SwissGold">#FFFFD700</Color>
+      <SolidColorBrush x:Key="SwissGoldBrush" Color="{StaticResource SwissGold}" />
+
+      <!-- Logo Colors - Swiss Red gradient -->
+      <LinearGradientBrush x:Key="LogoAccentColor" StartPoint="1,0" EndPoint="0,1">
+        <GradientStop Color="#DC143C" Offset="0"/>
+        <GradientStop Color="#C61237" Offset="1"/>
+      </LinearGradientBrush>
+
+      <!-- Action Buttons - Swiss Red -->
+      <SolidColorBrush x:Key="ActionButtonBackgroundColor" Color="{StaticResource SystemAccentColor}" />
+      <SolidColorBrush x:Key="ActionButtonForegroundColor">White</SolidColorBrush>
+
+      <SolidColorBrush x:Key="ActionButtonPointerOverBackgroundColor" Color="{StaticResource SystemAccentColorLight1}" />
+      <SolidColorBrush x:Key="ActionButtonPointerOverForegroundColor">White</SolidColorBrush>
+
+      <SolidColorBrush x:Key="ActionButtonPressedBackgroundColor" Color="{StaticResource SystemAccentColorDark1}" />
+      <SolidColorBrush x:Key="ActionButtonPressedForegroundColor">White</SolidColorBrush>
+
+      <!-- Function Buttons - Swiss Red -->
+      <SolidColorBrush x:Key="FunctionButtonBackgroundColor" Color="{StaticResource SystemAccentColor}" />
+      <SolidColorBrush x:Key="FunctionButtonForegroundColor">White</SolidColorBrush>
+
+      <SolidColorBrush x:Key="FunctionButtonPointerOverBackgroundColor" Color="{StaticResource SystemAccentColorLight1}" />
+      <SolidColorBrush x:Key="FunctionButtonPointerOverForegroundColor">White</SolidColorBrush>
+
+      <SolidColorBrush x:Key="FunctionButtonPressedBackgroundColor" Color="{StaticResource SystemAccentColorDark1}" />
+      <SolidColorBrush x:Key="FunctionButtonPressedForegroundColor">White</SolidColorBrush>
+
+      <SolidColorBrush x:Key="FunctionButtonSelectedBackgroundColor" Color="{StaticResource SystemAccentColorDark1}" />
+      <SolidColorBrush x:Key="FunctionButtonSelectedForegroundColor">White</SolidColorBrush>
+
+      <!-- Text Control Focus - Swiss Red border -->
+      <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="{StaticResource SystemAccentColor}" />
+
+      <!-- ScrollBar - Swiss Red -->
+      <SolidColorBrush x:Key="ScrollBarThumbBackgroundColor" Color="{DynamicResource SystemAccentColor}" />
+      <SolidColorBrush x:Key="ScrollBarPanningThumbBackground" Color="{DynamicResource SystemAccentColor}" />
+      <SolidColorBrush x:Key="ScrollBarThumbFillPressed" Color="{DynamicResource SystemAccentColorDark1}" />
+      <SolidColorBrush x:Key="ScrollBarThumbFillPointerOver" Color="{DynamicResource SystemAccentColorLight1}" />
+
+      <!-- Privacy Control - Swiss Red for whitelist -->
+      <SolidColorBrush x:Key="PrivacyControlWhiteListBackground" Color="{StaticResource SystemAccentColor}" Opacity="0.5" />
+      <SolidColorBrush x:Key="PrivacyControlItemBlackListHighlight" Color="{StaticResource SystemAccentColorLight2}" />
+      <SolidColorBrush x:Key="PrivacyControlItemWhiteListHighlight" Color="{StaticResource SystemAccentColorLight2}" />
+
+      <!-- Positive Amount Color - Swiss Red (instead of green) -->
+      <SolidColorBrush x:Key="PositiveAmountColor" Color="{StaticResource SystemAccentColor}" />
+      <SolidColorBrush x:Key="PositiveBrush" Color="{StaticResource SystemAccentColor}" />
+
+      <!-- Notification Cards - Swiss Red -->
+      <SolidColorBrush x:Key="NotificationCardInformationBackgroundBrush" Color="{StaticResource SystemAccentColor}" />
+
+      <!-- Accent Opacity Variants -->
+      <SolidColorBrush x:Key="LowOpacityAccentBrush" Opacity="0.8" Color="{DynamicResource SystemAccentColor}" />
+      <SolidColorBrush x:Key="HighOpacityAccentBrush" Opacity="0.9" Color="{DynamicResource SystemAccentColor}" />
+
+      <!-- LineChart - Swiss Red -->
+      <StaticResource x:Key="LineChartAreaGradientCursorStrokeColor" ResourceKey="SystemAccentColor" />
+      <StaticResource x:Key="LineChartLineColor" ResourceKey="SystemAccentColor" />
+
+      <!-- CoinJoin Wave - Swiss Red -->
+      <Color x:Key="CoinjoinWaveDefaultColor">#FFDC143C</Color>
+      <Color x:Key="CoinjoinActiveColor">#FFFFD700</Color> <!-- Swiss Gold for active state -->
+
+      <!-- Wallet Icon - Swiss Red gradient -->
+      <Color x:Key="WalletIconAccentStartColor">#DC143C</Color>
+      <Color x:Key="WalletIconAccentEndColor">#C61237</Color>
+
+      <!-- Network badge - Swiss Gold -->
+      <Color x:Key="NetworkBadgeColor">#FFD700</Color>
+    </ResourceDictionary>
+  </Styles.Resources>
+</Styles>

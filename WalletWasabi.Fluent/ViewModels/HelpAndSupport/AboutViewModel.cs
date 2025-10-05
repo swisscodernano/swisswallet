@@ -1,0 +1,156 @@
+using System.Collections.Generic;
+using System.Windows.Input;
+using ReactiveUI;
+using WalletWasabi.Fluent.Models.UI;
+using WalletWasabi.Fluent.ViewModels.Navigation;
+using WalletWasabi.Helpers;
+
+namespace WalletWasabi.Fluent.ViewModels.HelpAndSupport;
+
+[NavigationMetaData(
+	Title = "About SwissWallet",
+	Caption = "Display SwissWallet's current info",
+	IconName = "info_regular",
+	Order = 4,
+	Category = "Help & Support",
+	Keywords = new[]
+	{
+			"About", "Software", "Version", "Source", "Code", "Github", "Website", "Coordinator", "Status", "Stats", "Tor", "Onion",
+			"User", "Support", "Bug", "Report", "FAQ", "Questions,", "Docs", "Documentation", "License", "Advanced", "Information",
+			"Hardware", "Wallet"
+	},
+	NavBarPosition = NavBarPosition.None,
+	NavigationTarget = NavigationTarget.DialogScreen)]
+public partial class AboutViewModel : RoutableViewModel
+{
+	public AboutViewModel(UiContext uiContext, bool navigateBack = false)
+	{
+		UiContext = uiContext;
+
+		EnableBack = navigateBack;
+
+		Links = new List<ViewModelBase>()
+			{
+				new LinkViewModel(UiContext)
+				{
+					Link = SwissCoordinatorLink,
+					Description = "🇨🇭 Swiss Coordinator (Official)",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = CoordinatorTorLink,
+					Description = "Coordinator (Tor Onion)",
+					IsClickable = false
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = CoordinatorHttpsLink,
+					Description = "Coordinator (HTTPS)",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = DocsLink,
+					Description = "Documentation",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = SourceCodeLink,
+					Description = "Source Code (GitHub)",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = ClearnetLink,
+					Description = "Website (Clearnet)",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = TorLink,
+					Description = "Website (Tor)",
+					IsClickable = false
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = UserSupportLink,
+					Description = "User Support",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = BugReportLink,
+					Description = "Bug Report",
+					IsClickable = true
+				},
+				new SeparatorViewModel(),
+				new LinkViewModel(UiContext)
+				{
+					Link = FAQLink,
+					Description = "FAQ",
+					IsClickable = true
+				},
+			};
+
+		License = new LinkViewModel(UiContext)
+		{
+			Link = LicenseLink,
+			Description = "MIT License",
+			IsClickable = true
+		};
+
+		OpenBrowserCommand = ReactiveCommand.CreateFromTask<string>(x => UiContext.FileSystem.OpenBrowserAsync(x));
+
+		ReleaseHighlightsDialogCommand = ReactiveCommand.CreateFromTask(async () => await Navigate().To().ReleaseHighlightsDialog().GetResultAsync());
+
+		CopyLinkCommand = ReactiveCommand.CreateFromTask<string>(async (link) => await UiContext.Clipboard.SetTextAsync(link));
+
+		NextCommand = CancelCommand;
+
+		SetupCancel(enableCancel: false, enableCancelOnEscape: true, enableCancelOnPressed: true);
+	}
+
+	public List<ViewModelBase> Links { get; }
+
+	public LinkViewModel License { get; }
+
+	public ICommand ReleaseHighlightsDialogCommand { get; }
+
+	public ICommand OpenBrowserCommand { get; }
+
+	public ICommand CopyLinkCommand { get; }
+
+	public Version ClientVersion => Constants.ClientVersion;
+
+	public static string SwissCoordinatorLink => "https://swisscoordinator.app";
+
+	public static string CoordinatorTorLink => "http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion";
+
+	public static string CoordinatorHttpsLink => "https://wasabi.swisscoordinator.app";
+
+	public static string ClearnetLink => "https://github.com/swisscodernano/swisswallet";
+
+	public static string TorLink => "http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion";
+
+	public static string SourceCodeLink => "https://github.com/swisscodernano/swisswallet";
+
+	public static string UserSupportLink => "https://github.com/swisscodernano/swisswallet/discussions";
+
+	public static string BugReportLink => "https://github.com/swisscodernano/swisswallet/issues/new";
+
+	public static string FAQLink => "https://github.com/swisscodernano/swisswallet/wiki";
+
+	public static string DocsLink => "https://github.com/swisscodernano/swisswallet/wiki";
+
+	public static string LicenseLink => "https://github.com/swisscodernano/swisswallet/blob/master/LICENSE.md";
+}

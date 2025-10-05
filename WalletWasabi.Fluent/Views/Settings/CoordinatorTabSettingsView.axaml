@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:settings="using:WalletWasabi.Fluent.ViewModels.Settings"
+             mc:Ignorable="d" d:DesignWidth="428" d:DesignHeight="371"
+             x:DataType="settings:CoordinatorTabSettingsViewModel"
+             x:Class="WalletWasabi.Fluent.Views.Settings.CoordinatorTabSettingsView"
+             x:CompileBindings="True">
+  <StackPanel Classes="settingsLayout">
+
+    <!-- Swiss Coordinator Info Panel -->
+    <Border Background="#FFF5F5F5" BorderBrush="#FFDC143C" BorderThickness="2" CornerRadius="4" Padding="12" Margin="0,0,0,16">
+      <StackPanel>
+        <TextBlock Text="🇨🇭 Swiss Coordinator - Hardcoded for Security" FontWeight="Bold" Foreground="#FFDC143C" Margin="0,0,0,8"/>
+        <TextBlock Text="{Binding SwissCoordinatorInfo}" TextWrapping="Wrap" FontSize="12" Foreground="#FF666666"/>
+      </StackPanel>
+    </Border>
+
+    <DockPanel ToolTip.Tip="🔒 Coordinator is hardcoded for Swiss security standards and cannot be changed.">
+      <TextBlock Text="Coordinator URI" />
+      <TextBox Name="CoordinatorTextBox" Text="{Binding CoordinatorUri}" IsReadOnly="True" Background="#FFEEEEEE">
+        <Interaction.Behaviors>
+          <TextBoxAutoSelectTextBehavior />
+        </Interaction.Behaviors>
+      </TextBox>
+    </DockPanel>
+
+    <DockPanel ToolTip.Tip="The client will refuse to participate in rounds with a mining fee rate (sat/vb) higher than the value indicated here.">
+      <StackPanel>
+        <TextBlock Text="Max Coinjoin Mining Fee Rate" Margin="0,0,0,4"/>
+        <TextBlock Text="{Binding RecommendedFeeRateInfo}" TextWrapping="Wrap" FontSize="11" Foreground="#FF0088CC" Margin="0,0,0,4"/>
+      </StackPanel>
+      <CurrencyEntryBox Classes="standalone" Name="CoinJoinMiningFeeRateTextBox" Text="{Binding MaxCoinJoinMiningFeeRate}" CurrencyCode="sat/vb"/>
+    </DockPanel>
+
+    <DockPanel ToolTip.Tip="The client will refuse to participate in rounds with a minimum input count lower than the value indicated here.">
+      <TextBlock Text="Min Input Count" />
+      <TextBox Classes="standalone" Name="AbsoluteMinInputCountTextBox" Text="{Binding AbsoluteMinInputCount}">
+        <Interaction.Behaviors>
+          <TextBoxAutoSelectTextBehavior />
+        </Interaction.Behaviors>
+      </TextBox>
+    </DockPanel>
+  </StackPanel>
+</UserControl>
