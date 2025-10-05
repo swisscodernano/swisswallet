@@ -32,7 +32,7 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 	[AutoNotify] private string _swissCoordinatorInfo;
 	[AutoNotify] private string _recommendedFeeRateInfo;
 
-	public CoordinatorTabSettingsViewModel(IApplicationSettings settings)
+	private CoordinatorTabSettingsViewModel(IApplicationSettings settings)
 	{
 		Settings = settings;
 
