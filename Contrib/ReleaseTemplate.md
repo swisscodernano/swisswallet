@@ -1,4 +1,4 @@
-### _[Wasabi Wallet](https://wasabiwallet.io) is an easy to use, privacy-focused, open-source, non-custodial, Bitcoin wallet._
+### _[SwissWallet](https://swisscoordinator.app) is a privacy-focused, open-source, non-custodial Bitcoin wallet with Swiss sovereignty._
 
 # Download
 :window: [Windows](https://github.com/WalletWasabi/WalletWasabi/releases/download/v{version}/Wasabi-{version}.msi)
@@ -15,16 +15,16 @@
 
 ## Installation Guide
 Download the operating system relevant software package and install Wasabi like you would with any other software on your computer.
-For a detailed installation guide, including **signature verification**, see [the documentation](https://docs.wasabiwallet.io/using-wasabi/InstallPackage.html).
+For a detailed installation guide, including **signature verification**, see [the documentation](https://github.com/swisscodernano/swisswallet/tree/master/docs).
 
 ## Documentation
-:spider_web: [Website](https://wasabiwallet.io)
-:onion: [Tor onion site](http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion/)
-:orange_book: [Documentation](https://docs.wasabiwallet.io)
-:grey_question: [FAQ](https://github.com/WalletWasabi/WalletWasabi/discussions/categories/faq)
+:spider_web: [Website](https://swisscoordinator.app)
+:onion: [Coordinator (Tor)](http://rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion/)
+:orange_book: [Documentation](https://github.com/swisscodernano/swisswallet/tree/master/docs)
+:grey_question: [FAQ](https://github.com/swisscodernano/swisswallet/discussions/categories/faq)
 
 ## Advanced Guide
-If you want to build or update Wasabi from source code, check out [these easy instructions](https://docs.wasabiwallet.io/using-wasabi/BuildSource.html).
+If you want to build or update SwissWallet from source code, check out [these easy instructions](https://github.com/swisscodernano/swisswallet/blob/master/docs/build/BUILD_QUICK_START.md).
 
 Wasabi uses [reproducible builds](https://reproducible-builds.org/), which you can verify with [this guide](https://github.com/WalletWasabi/WalletWasabi/blob/master/WalletWasabi.Documentation/Guides/DeterministicBuildGuide.md).
 
