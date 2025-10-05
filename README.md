@@ -31,6 +31,7 @@ We forked Wasabi Wallet to provide Swiss citizens (and privacy-conscious global 
 - 🔍 **Complete Transparency** — Open-source, reproducible builds, auditable code
 
 **→ Read the full manifesto:** [WHY_SWISS.md](WHY_SWISS.md)
+**→ Swiss Coordinator Website:** [swisscoordinator.app](https://swisscoordinator.app)
 
 *Switzerland defended its independence for 500 years. SwissWallet extends this to your digital sovereignty.*
 
