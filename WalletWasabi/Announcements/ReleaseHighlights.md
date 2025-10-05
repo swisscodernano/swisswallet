@@ -6,15 +6,16 @@
 #### 🛠️ Refinements & Fixes
 
 ## Release Summary
-Wasabi Wallet v2.7.0 is a stabilization release that not only strengthens reliability but also brings a fresh look and smoother performance.
+SwissWallet v3.0.1 brings Swiss sovereignty to Bitcoin privacy with hardcoded Swiss coordinators, professional documentation, and complete Swiss visual identity.
 
-### 🟠 Enhanced Bitcoin Node Integration
-Bitcoin node connectivity is now more seamless. RPC endpoint handling has been refined for smoother setup, with support for onion-service RPC interfaces.
+### 🇨🇭 Swiss Coordinators
+All CoinJoin privacy operations route exclusively through Swiss infrastructure. Primary Tor onion service with HTTPS fallback ensures maximum privacy under Swiss law.
 
-Additionally, Wasabi no longer bundles bitcoind binaries, while block downloading has been simplified and made more dependable.
+### 🎨 Swiss Visual Identity
+Complete UI refresh with Swiss Red (#DC143C) color scheme, Swiss flag iconography, and professional Swiss branding throughout the application.
 
-### 🎨 Refreshed UI with Icons & Animations
-The interface has been given a polished update. Subtle animations and a balanced color scheme breathe new life into Wasabi’s design, making it both cleaner and less aggressive.
+### 📁 Professional Repository
+Comprehensive documentation with WHY_SWISS.md manifesto explaining the 5 pillars of Swiss digital sovereignty: Neutrality, Privacy, Precision, Democracy, and Economic Sovereignty.
 
 ### ⚙️ Dedicated Config Files Per Network
 Each network  Mainnet, Testnet4, and Regtest — now has its own independent configuration file. Switching to test networks is easier and your preferences are always preserved.
