@@ -1,3 +1,5 @@
+#pragma warning disable WW002 // SwissWallet: Manual instantiation required, not DI-generated
+
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
