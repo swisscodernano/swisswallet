@@ -13,7 +13,6 @@ using WalletWasabi.WabiSabi.Client;
 
 namespace WalletWasabi.Fluent.ViewModels.Settings;
 
-[AppLifetime]
 [NavigationMetaData(
 	Title = "Coordinator",
 	Caption = "🇨🇭 Swiss Coordinator - Hardcoded for Security",
@@ -32,7 +31,7 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 	[AutoNotify] private string _swissCoordinatorInfo;
 	[AutoNotify] private string _recommendedFeeRateInfo;
 
-	private CoordinatorTabSettingsViewModel(IApplicationSettings settings)
+	public CoordinatorTabSettingsViewModel(IApplicationSettings settings)
 	{
 		Settings = settings;
 
