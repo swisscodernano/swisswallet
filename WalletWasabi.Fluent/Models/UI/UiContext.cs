@@ -1,3 +1,4 @@
+using System;
 using WalletWasabi.Announcements;
 using WalletWasabi.Fluent.Models.ClientConfig;
 using WalletWasabi.Fluent.Models.FileSystem;
@@ -5,6 +6,7 @@ using WalletWasabi.Fluent.Models.Wallets;
 using WalletWasabi.Fluent.ViewModels;
 using WalletWasabi.Fluent.ViewModels.Navigation;
 using WalletWasabi.Fluent.ViewModels.SearchBar.Sources;
+using WalletWasabi.WabiSabi.Client;
 
 namespace WalletWasabi.Fluent.Models.UI;
 
@@ -33,7 +35,8 @@ public class UiContext
 		IEditableSearchSource editableSearchSource,
 		ITorStatusCheckerModel torStatusChecker,
 		IHealthMonitor healthMonitor,
-		ReleaseHighlights releaseHighlights)
+		ReleaseHighlights releaseHighlights,
+		CoordinatorConfigService? coordinatorConfigService = null)
 	{
 		QrCodeGenerator = qrCodeGenerator ?? throw new ArgumentNullException(nameof(qrCodeGenerator));
 		QrCodeReader = qrCodeReader ?? throw new ArgumentNullException(nameof(qrCodeReader));
@@ -50,6 +53,7 @@ public class UiContext
 		TorStatusChecker = torStatusChecker ?? throw new ArgumentNullException(nameof(torStatusChecker));
 		HealthMonitor = healthMonitor ?? throw new ArgumentNullException(nameof(healthMonitor));
 		ReleaseHighlights = releaseHighlights ?? throw new ArgumentNullException(nameof(releaseHighlights));
+		CoordinatorConfigService = coordinatorConfigService; // Optional service
 	}
 
 	public IUiClipboard Clipboard { get; }
@@ -67,6 +71,7 @@ public class UiContext
 	public ITorStatusCheckerModel TorStatusChecker { get; }
 	public IHealthMonitor HealthMonitor { get; }
 	public ReleaseHighlights ReleaseHighlights { get; }
+	public CoordinatorConfigService? CoordinatorConfigService { get; }
 	public MainViewModel? MainViewModel { get; private set; }
 
 	public void RegisterNavigation(INavigate navigate)

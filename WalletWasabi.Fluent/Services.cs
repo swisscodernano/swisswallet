@@ -8,6 +8,7 @@ using WalletWasabi.Services;
 using WalletWasabi.Services.Terminate;
 using WalletWasabi.Stores;
 using WalletWasabi.Tor;
+using WalletWasabi.WabiSabi.Client;
 using WalletWasabi.Wallets;
 
 namespace WalletWasabi.Fluent;
@@ -44,6 +45,7 @@ public static class Services
 	public static StatusContainer Status { get; set; }
 
 	public static EventBus EventBus { get;  set; } = null;
+	public static CoordinatorConfigService? CoordinatorConfigService { get; private set; }
 	public static bool IsInitialized { get; private set; }
 
 	/// <summary>
@@ -76,6 +78,7 @@ public static class Services
 		TerminateService = terminateService;
 		EventBus = global.EventBus;
 		Status = global.Status;
+		CoordinatorConfigService = global.CoordinatorConfigService;
 
 		IsInitialized = true;
 	}

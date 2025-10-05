@@ -114,6 +114,7 @@ public class Global
 	private TorProcessManager? _torManager;
 	private IRPCClient? _bitcoinRpcClient;
 	private CoinPrison? _coinPrison;
+	private CoordinatorConfigService? _coordinatorConfigService;
 	private readonly Timer _ticker;
 	private readonly AllTransactionStore _allTransactionStore;
 	private readonly IndexStore _indexStore;
@@ -133,6 +134,7 @@ public class Global
 	public JsonRpcServer? RpcServer { get; private set; }
 	public Uri? OnionServiceUri { get; private set; }
 	public EventBus EventBus { get; }
+	public CoordinatorConfigService? CoordinatorConfigService => _coordinatorConfigService;
 
 	private BlockProvider ConfigureBlockProvider(NodesGroup nodesGroup, FileSystemBlockRepository fileSystemBlockRepository)
 	{
@@ -496,6 +498,10 @@ public class Global
 			TimeBeforeRetringAfterTooManyRequests = TimeSpan.FromSeconds(0.1)
 		};
 		var coordinatorHttpClientFactory = new CoordinatorHttpClientFactory(coordinatorUri, BuildHttpClientFactory(coordinatorHttpClientConfig));
+
+		// Initialize Swiss Coordinator Config Service
+		_coordinatorConfigService = new CoordinatorConfigService(coordinatorHttpClientFactory);
+		Logger.LogInfo("🇨🇭 Swiss Coordinator Config Service initialized");
 
 		var wabiSabiStatusProvider =  new WabiSabiHttpApiClient("satoshi-coordination", coordinatorHttpClientFactory);
 		var roundUpdater = Spawn("RoundUpdater",
