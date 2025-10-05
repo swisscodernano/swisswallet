@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<NoWarn>1701;1702;1705;1591;1573;CA1031;CA1822</NoWarn>
+		<NoWarn>1701;1702;1705;1591;1573;CA1031;CA1822;CA1304;CA1305;CA1307;CA1310</NoWarn>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 		<DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
