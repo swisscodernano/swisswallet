@@ -9,6 +9,8 @@
 	<!-- Disabled InvariantGlobalization to fix macOS launch issue with Avalonia UI -->
 	<InvariantGlobalization>false</InvariantGlobalization>
 	<WarningsAsErrors>false</WarningsAsErrors>
+	<!-- Suppress globalization warnings since we now support full globalization -->
+	<NoWarn>$(NoWarn);CA1304;CA1305;CA1307;CA1310</NoWarn>
 
 	<!-- Audit both top-level and transitive dependencies for vulnerabilities in NuGet packages. -->
 	<!-- https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages#setting-a-security-audit-mode -->
