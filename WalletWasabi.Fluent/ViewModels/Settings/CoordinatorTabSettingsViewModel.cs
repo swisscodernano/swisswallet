@@ -1,4 +1,6 @@
+using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using ReactiveUI;
 using WalletWasabi.Fluent.Extensions;
 using WalletWasabi.Fluent.Infrastructure;
@@ -7,6 +9,7 @@ using WalletWasabi.Fluent.Validation;
 using WalletWasabi.Fluent.ViewModels.Navigation;
 using WalletWasabi.Helpers;
 using WalletWasabi.Models;
+using WalletWasabi.WabiSabi.Client;
 
 namespace WalletWasabi.Fluent.ViewModels.Settings;
 
@@ -27,6 +30,7 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 	[AutoNotify] private string _maxCoinJoinMiningFeeRate;
 	[AutoNotify] private string _absoluteMinInputCount;
 	[AutoNotify] private string _swissCoordinatorInfo;
+	[AutoNotify] private string _recommendedFeeRateInfo;
 
 	public CoordinatorTabSettingsViewModel(IApplicationSettings settings)
 	{
@@ -37,6 +41,8 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 		                        "Primary (Tor): rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion\n" +
 		                        "Fallback (HTTPS): wasabi.swisscoordinator.app\n\n" +
 		                        "This setting cannot be changed to ensure Swiss privacy standards.";
+
+		_recommendedFeeRateInfo = "💡 Loading recommended values from Swiss Coordinator...";
 
 		// Note: Coordinator URI validation disabled for SwissWallet as it's hardcoded
 		// this.ValidateProperty(x => x.CoordinatorUri, ValidateCoordinatorUri);
@@ -60,6 +66,35 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 		this.WhenAnyValue(x => x.Settings.AbsoluteMinInputCount)
 			.ToSignal()
 			.Subscribe(x => AbsoluteMinInputCount = Settings.AbsoluteMinInputCount);
+
+		// Fetch recommended values from coordinator
+		Task.Run(async () => await LoadRecommendedValues());
+	}
+
+	private async Task LoadRecommendedValues()
+	{
+		try
+		{
+			var configService = UiContext.Default?.CoordinatorConfigService;
+			if (configService is not null)
+			{
+				var config = await configService.GetConfigAsync();
+				if (config is not null && config.IsValid)
+				{
+					RecommendedFeeRateInfo = $"💡 Recommended: {config.RecommendedMiningFeeRate} sat/vB (from Swiss Coordinator)\n" +
+					                         $"   Valid range: {config.MinMiningFeeRate} - {config.MaxMiningFeeRate} sat/vB";
+					return;
+				}
+			}
+
+			// Fallback if service not available or config fetch failed
+			RecommendedFeeRateInfo = $"💡 Default: {Constants.DefaultMaxCoinJoinMiningFeeRate} sat/vB\n" +
+			                         $"   Range: 10 - 200 sat/vB";
+		}
+		catch
+		{
+			RecommendedFeeRateInfo = $"💡 Default: {Constants.DefaultMaxCoinJoinMiningFeeRate} sat/vB";
+		}
 	}
 
 	// SwissWallet: Coordinator is always read-only (hardcoded for security)

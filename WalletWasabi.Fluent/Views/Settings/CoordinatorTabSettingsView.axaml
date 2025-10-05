@@ -27,7 +27,10 @@
     </DockPanel>
 
     <DockPanel ToolTip.Tip="The client will refuse to participate in rounds with a mining fee rate (sat/vb) higher than the value indicated here.">
-      <TextBlock Text="Max Coinjoin Mining Fee Rate" />
+      <StackPanel>
+        <TextBlock Text="Max Coinjoin Mining Fee Rate" Margin="0,0,0,4"/>
+        <TextBlock Text="{Binding RecommendedFeeRateInfo}" TextWrapping="Wrap" FontSize="11" Foreground="#FF0088CC" Margin="0,0,0,4"/>
+      </StackPanel>
       <CurrencyEntryBox Classes="standalone" Name="CoinJoinMiningFeeRateTextBox" Text="{Binding MaxCoinJoinMiningFeeRate}" CurrencyCode="sat/vb"/>
     </DockPanel>
 
