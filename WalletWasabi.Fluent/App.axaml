@@ -40,7 +40,7 @@
   </NativeMenu.Menu>
   <TrayIcon.Icons>
     <TrayIcons>
-      <TrayIcon Icon="/Assets/WasabiLogo.ico" Command="{Binding ShowCommand}" ToolTipText="SwissWallet">
+      <TrayIcon Icon="avares://WalletWasabi.Fluent.Desktop/Assets/SwissWallet.ico" Command="{Binding ShowCommand}" ToolTipText="SwissWallet">
         <!-- TODO: This is temporary workaround until https://github.com/WalletWasabi/WalletWasabi/issues/8151 is fixed. -->
         <!--<NativeMenu.Menu>
           <NativeMenu>
