@@ -227,17 +227,14 @@ mkdir -p $DEBIAN
 mkdir -p $DEBIAN_BIN
 mkdir -p $DEBIAN_USR/share/{applications,icons/hicolor}
 
-# Copy icon files (using Swiss logo when available, fallback to Wasabi for now)
-ICON_SOURCE_DIR="./Contrib/Assets"
-if [ -f "$ICON_SOURCE_DIR/SwissLogo.png" ]; then
-  ICON_PREFIX="SwissLogo"
-else
-  ICON_PREFIX="WasabiLogo"
-fi
+# Copy Swiss icon files
+ICON_SOURCE_DIR="./Contrib/Assets/Swiss"
 
-for ICON_FILE in $ICON_SOURCE_DIR/${ICON_PREFIX}*.png; do
+# Copy all Swiss icon sizes to appropriate directories
+for ICON_FILE in $ICON_SOURCE_DIR/icon_*.png; do
   if [ -f "$ICON_FILE" ]; then
-    SIZE=$(echo "$ICON_FILE" | grep -oP '\d+')
+    # Extract size from filename (e.g., icon_256x256.png -> 256)
+    SIZE=$(basename "$ICON_FILE" | grep -oP '\d+' | head -1)
     ICON_DIR="$DEBIAN_USR/share/icons/hicolor/${SIZE}x${SIZE}/apps"
     mkdir -p "$ICON_DIR"
     cp "$ICON_FILE" "$ICON_DIR/$EXECUTABLE_NAME.png"

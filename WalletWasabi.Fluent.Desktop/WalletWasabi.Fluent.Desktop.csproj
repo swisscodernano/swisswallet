@@ -18,22 +18,22 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Authors>zkSNACKs Ltd</Authors>
-		<Company>zkSNACKs Ltd</Company>
+		<Authors>SwissWallet Contributors (based on zkSNACKs Ltd work)</Authors>
+		<Company>SwissWallet Project</Company>
 		<NeutralLanguage>en-US</NeutralLanguage>
-		<AssemblyTitle>Wasabi Wallet</AssemblyTitle>
+		<AssemblyTitle>SwissWallet</AssemblyTitle>
 		<Description>
-			Open-source, non-custodial, privacy focused Bitcoin wallet for Windows, Linux, and Mac. Built-in Tor, coinjoin, payjoin and coin control features.
+			Swiss-hardened Bitcoin privacy wallet with Tor-first connectivity. Fork of Wasabi Wallet with Swiss coordinators and enhanced security focus.
 		</Description>
 		<Copyright>MIT</Copyright>
-		<PackageTags>bitcoin-wallet;privacy;bitcoin;dotnet;nbitcoin;cross-platform;zerolink;wallet;wabisabi;coinjoin;tor</PackageTags>
-		<PackageProjectUrl>https://github.com/WalletWasabi/WalletWasabi/</PackageProjectUrl>
-		<PackageLicenseUrl>https://github.com/WalletWasabi/WalletWasabi/blob/master/LICENSE.md</PackageLicenseUrl>
+		<PackageTags>bitcoin-wallet;privacy;bitcoin;dotnet;nbitcoin;cross-platform;wallet;wabisabi;coinjoin;tor;swiss;sovereignty</PackageTags>
+		<PackageProjectUrl>https://github.com/swisswallet/swisswallet/</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/swisswallet/swisswallet/blob/master/LICENSE.md</PackageLicenseUrl>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/WalletWasabi/WalletWasabi/</RepositoryUrl>
-		<ApplicationIcon>Assets\WasabiLogo.ico</ApplicationIcon>
-		<PackageIcon>Assets\WasabiLogo.ico</PackageIcon>
-		<Product>Wasabi Wallet</Product>
+		<RepositoryUrl>https://github.com/swisswallet/swisswallet/</RepositoryUrl>
+		<ApplicationIcon>Assets\SwissWallet.ico</ApplicationIcon>
+		<PackageIcon>Assets\SwissWallet.ico</PackageIcon>
+		<Product>SwissWallet</Product>
 		<!-- owners is not supported in MSBuild -->
 	</PropertyGroup>
 
