@@ -142,9 +142,6 @@ for PLATFORM in "${PLATFORMS[@]}"; do
             --no-cache \
             --no-restore \
             --property:SelfContained=true \
-            --property:PublishSingleFile=false \
-            --property:PublishTrimmed=false \
-            --property:IncludeNativeLibrariesForSelfExtract=true \
             --property:VersionPrefix=$VERSION \
             --property:DebugType=none \
             --property:DebugSymbols=false \
