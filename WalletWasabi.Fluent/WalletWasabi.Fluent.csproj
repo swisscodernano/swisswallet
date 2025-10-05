@@ -42,7 +42,8 @@
 		<ProjectReference Include="..\WalletWasabi.Fluent.Generators\WalletWasabi.Fluent.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" AdditionalProperties="IsRidAgnostic=true" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!-- Removed System.Globalization.Invariant to fix macOS launch issue -->
+	<!-- <ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
-	</ItemGroup>
+	</ItemGroup> -->
 </Project>
