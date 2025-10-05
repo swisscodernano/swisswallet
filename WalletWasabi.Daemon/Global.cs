@@ -312,7 +312,9 @@ public class Global
 		Uri[] relayUrls = [new ("wss://relay.primal.net"), new("wss://nos.lol"), new("wss://relay.damus.io")];
 		var nostrClientFactory = () => NostrClientFactory.Create(relayUrls, TorSettings.SocksEndpoint);
 
-		// The feature is disabled on linux at the moment because we install Wasabi Wallet as a Debian package.
+		// SwissWallet: Update manager disabled - updates managed through GitHub releases only
+		// Original Wasabi update mechanism would conflict with SwissWallet versioning
+		/*
 		var installerDownloader = !Config.DownloadNewVersion
 			? ReleaseDownloader.AutoDownloadOff()
 			: RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && !PlatformInformation.IsDebianBasedOS()
@@ -327,6 +329,7 @@ public class Global
 					UpdateManager.CreateUpdater(nostrClientFactory, installerDownloader, EventBus))));
 		wasabiVersionUpdater.DisposeUsing(_disposables);
 		EventBus.Subscribe<Tick>(_ => wasabiVersionUpdater.Post(new UpdateManager.UpdateMessage()));
+		*/
 	}
 
 	private CpfpInfoProvider ConfigureCpfpInfoProvider()

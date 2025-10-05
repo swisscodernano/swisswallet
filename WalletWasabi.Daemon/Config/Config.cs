@@ -187,7 +187,7 @@ public class Config
 
 	public static string DataDir { get; } = GetStringValue(
 		"datadir",
-		EnvironmentHelpers.GetDataDir(Path.Combine("WalletWasabi", "Client")),
+		EnvironmentHelpers.GetDataDir(Path.Combine("SwissWallet", "Client")),
 		Environment.GetCommandLineArgs()).EffectiveValue;
 
 	/// <summary>Whether a config option was overridden by a command line argument or an environment variable.</summary>
