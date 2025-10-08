@@ -19,7 +19,7 @@
         Title="SwissWallet"
         WindowState="{Binding WindowState, Mode=TwoWay}"
         Focusable="True"
-        Icon="/Assets/WasabiLogo.ico"
+        Icon="/Assets/SwissWallet.ico"
         RenderOptions.BitmapInterpolationMode="HighQuality"
         RenderOptions.TextRenderingMode="SubpixelAntialias"
         RenderOptions.RequiresFullOpacityHandling="True">
