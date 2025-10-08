@@ -252,6 +252,15 @@ public partial class ApplicationSettings : ReactiveObject
 			});
 	}
 
+	/// <summary>
+	/// SwissWallet: Forces an immediate save, bypassing the throttle.
+	/// Used when closing settings dialog to ensure changes are persisted.
+	/// </summary>
+	public void ForceSave()
+	{
+		Save();
+	}
+
 	private PersistentConfig ApplyChanges(PersistentConfig config)
 	{
 		PersistentConfig result = config;

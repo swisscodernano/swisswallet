@@ -49,7 +49,13 @@ public partial class SettingsPageViewModel : DialogViewModelBase<Unit>
 		ConnectionsSettingsTab = new ConnectionsSettingsTabViewModel(UiContext.ApplicationSettings);
 
 		RestartCommand = ReactiveCommand.Create(() => AppLifetimeHelper.Shutdown(withShutdownPrevention: true, restart: true));
-		NextCommand = ReactiveCommand.Create(() => Close());
+		NextCommand = ReactiveCommand.Create(() =>
+		{
+			// SwissWallet: Force immediate save before closing to ensure all changes are persisted
+			// This fixes the 500ms throttle issue where rapid "Done" clicks could lose changes
+			UiContext.ApplicationSettings.ForceSave();
+			Close();
+		});
 
 		this.WhenAnyValue(x => x.UiContext.ApplicationSettings.DarkModeEnabled)
 			.Skip(1)
