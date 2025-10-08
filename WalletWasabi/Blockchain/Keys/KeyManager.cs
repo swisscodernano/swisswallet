@@ -32,7 +32,8 @@ public class KeyManager
 
 	public const int AbsoluteMinGapLimit = 21;
 	public const int MaxGapLimit = 10_000;
-	public static readonly Money DefaultPlebStopThreshold = Money.Coins(0.01m);
+	// SwissWallet: Lower threshold to 0.0001 BTC (100,000 sat) to make CoinJoin more accessible
+	public static readonly Money DefaultPlebStopThreshold = Money.Coins(0.0001m);
 
 	internal KeyManager(BitcoinEncryptedSecretNoEC? encryptedSecret, byte[]? chainCode, HDFingerprint? masterFingerprint, ExtPubKey extPubKey, ExtPubKey? taprootExtPubKey, int? minGapLimit, BlockchainState blockchainState, string? filePath = null, KeyPath? segwitAccountKeyPath = null, KeyPath? taprootAccountKeyPath = null)
 	{
