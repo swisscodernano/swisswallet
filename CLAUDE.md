@@ -6,6 +6,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SwissWallet is a privacy-focused Bitcoin wallet forked from Wasabi Wallet. It features hardcoded Swiss coordinators, Tor-first connectivity, and multi-platform distribution (macOS ARM64/x64, Windows x64, Linux x64).
 
+## IMPORTANT: Repository Structure
+
+**Working Directory:** `/home/swisswallet/swisswallet-bitcoin/` (or symlink `/home/swisswallet/swisswallet/`)
+
+Both paths point to the same directory:
+- `/home/swisswallet/swisswallet/` is a symlink to `/home/swisswallet/swisswallet-bitcoin/`
+- `/home/swisswallet/swisswallet-bitcoin/` is the actual repository directory
+- Always work in this directory for all development tasks
+
+**Git Remote:** `git@github.com-swisswallet-bitcoin:swisscodernano/swisswallet.git`
+**GitHub Repository:** `github.com/swisscodernano/swisswallet`
+
+All commits should be made to `/home/swisswallet/swisswallet-bitcoin/` (or its symlink `/home/swisswallet/swisswallet/`).
+
 **Key Coordinators:**
 - Primary (Tor): `rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion`
 - Fallback (HTTPS): `https://wasabi.swisscoordinator.app`
