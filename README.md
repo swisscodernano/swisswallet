@@ -73,7 +73,7 @@ We forked Wasabi Wallet to provide Swiss citizens (and privacy-conscious global 
 
 ## 📥 Download
 
-**Latest Release:** [v3.0.0](https://github.com/swisscodernano/swisswallet/releases/latest)
+**Latest Release:** [v3.2.1](https://github.com/swisscodernano/swisswallet/releases/latest)
 
 | Platform | Download |
 |----------|----------|
