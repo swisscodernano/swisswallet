@@ -32,7 +32,9 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 	[AutoNotify] private string _swissCoordinatorInfo;
 	[AutoNotify] private string _recommendedFeeRateInfo;
 
+#pragma warning disable WW002 // SwissWallet: Need public constructor for dependency injection
 	public CoordinatorTabSettingsViewModel(IApplicationSettings settings)
+#pragma warning restore WW002
 	{
 		Settings = settings;
 
@@ -40,7 +42,7 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 		_swissCoordinatorInfo = "🔒 SwissWallet uses hardcoded Swiss coordinators for maximum security.\n" +
 		                        "Primary (Tor): rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion\n" +
 		                        "Fallback (HTTPS): wasabi.swisscoordinator.app\n\n" +
-		                        "This setting cannot be changed to ensure Swiss privacy standards.";
+		                        "Tor address is displayed below for privacy. This setting cannot be changed to ensure Swiss privacy standards.";
 
 		_recommendedFeeRateInfo = "💡 Loading recommended values from Swiss Coordinator...";
 
@@ -49,7 +51,8 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 		this.ValidateProperty(x => x.MaxCoinJoinMiningFeeRate, ValidateMaxCoinJoinMiningFeeRate);
 		this.ValidateProperty(x => x.AbsoluteMinInputCount, ValidateAbsoluteMinInputCount);
 
-		_coordinatorUri = settings.CoordinatorUri;
+		// SwissWallet: Always display Tor onion address for privacy
+		_coordinatorUri = Constants.SwissCoordinatorOnion.Replace("http://", "");
 		_maxCoinJoinMiningFeeRate = settings.MaxCoinJoinMiningFeeRate;
 		_absoluteMinInputCount = settings.AbsoluteMinInputCount;
 
@@ -57,7 +60,7 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 				x => x.Settings.CoordinatorUri,
 				x => x.Settings.Network)
 			.ToSignal()
-			.Subscribe(x => CoordinatorUri = Settings.CoordinatorUri);
+			.Subscribe(x => CoordinatorUri = Constants.SwissCoordinatorOnion.Replace("http://", ""));
 
 		this.WhenAnyValue(x => x.Settings.MaxCoinJoinMiningFeeRate)
 			.ToSignal()

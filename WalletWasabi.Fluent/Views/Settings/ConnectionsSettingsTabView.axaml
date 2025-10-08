@@ -11,13 +11,19 @@
              x:DataType="settings:ConnectionsSettingsTabViewModel">
   <StackPanel Classes="settingsLayout">
 
-    <DockPanel ToolTip.Tip="The client will connect to this indexer. The indexer provides the block filters to synchronize the wallet.">
+    <!-- Swiss Indexer Info Panel -->
+    <Border Background="#FFF5F5F5" BorderBrush="#FFDC143C" BorderThickness="2" CornerRadius="4" Padding="12" Margin="0,0,0,16">
+      <StackPanel>
+        <TextBlock Text="🇨🇭 Swiss Indexer - Privacy Infrastructure" FontWeight="Bold" Foreground="#FFDC143C" Margin="0,0,0,8"/>
+        <TextBlock Text="{Binding SwissIndexerInfo}" TextWrapping="Wrap" FontSize="12" Foreground="#FF666666"/>
+      </StackPanel>
+    </Border>
+
+    <DockPanel ToolTip.Tip="🔒 Indexer is hardcoded to Swiss infrastructure for maximum privacy. Provides block filters via Tor.">
       <TextBlock Text="Indexer URI" />
-      <TextBox Text="{Binding IndexerUri}">
+      <TextBox Text="{Binding IndexerUri}" IsReadOnly="True" Background="#FFEEEEEE">
         <Interaction.Behaviors>
           <TextBoxAutoSelectTextBehavior />
-          <WhitespacePasteRemovalBehavior />
-          <WhitespaceInputRemovalBehavior />
         </Interaction.Behaviors>
       </TextBox>
     </DockPanel>

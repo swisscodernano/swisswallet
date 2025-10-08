@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 3D Gradient for Swiss Red Background -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF1A1A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#DC0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B00000;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Shadow for depth -->
+    <filter id="innerShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Highlight gradient for cross -->
+    <linearGradient id="crossGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F5F5F5;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Outer glow for modern look -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- macOS 2025 rounded square background with 3D gradient -->
+  <rect width="1024" height="1024" rx="226" ry="226" fill="url(#bgGradient)" filter="url(#innerShadow)"/>
+
+  <!-- White Swiss Cross with modern styling -->
+  <g filter="url(#glow)">
+    <!-- Vertical bar with subtle gradient -->
+    <rect x="410" y="308" width="204" height="408" rx="12" ry="12" fill="url(#crossGradient)"/>
+    <!-- Horizontal bar with subtle gradient -->
+    <rect x="308" y="410" width="408" height="204" rx="12" ry="12" fill="url(#crossGradient)"/>
+  </g>
+
+  <!-- Subtle highlight on top for 3D effect -->
+  <ellipse cx="512" cy="200" rx="300" ry="80" fill="#FFFFFF" opacity="0.15"/>
+</svg>

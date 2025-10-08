@@ -9,7 +9,11 @@ public static class Constants
 	public const string BackendMajorVersion = "4";
 	public const string ClientSupportBackendVersion = "4";
 
-	public const string IndexerUri = "https://api.wasabiwallet.io/";
+	// SwissWallet: Swiss Indexer Configuration (Tor-first)
+	public const string SwissIndexerOnion = "http://2jaslypvb6pyeret7zextmvbvvs4mqzvwsodihisozys7ecy6aqp4bid.onion";
+	public const string SwissIndexerClearnet = "https://wasabi.swisscoordinator.app"; // Fallback if needed
+
+	public const string IndexerUri = SwissIndexerOnion; // SwissWallet: Use Swiss indexer
 	public const string TestnetIndexerUri = "https://api.wasabiwallet.co/";
 	public const string RegTestIndexerUri = "http://localhost:37127/";
 

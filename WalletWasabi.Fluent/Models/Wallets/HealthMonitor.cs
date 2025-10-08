@@ -197,7 +197,8 @@ public partial class HealthMonitor : ReactiveObject
 			return HealthMonitorState.BackendNotCompatible;
 		}
 
-		if (IsBitcoinCoreIssueDetected)
+		// SwissWallet: Only show Bitcoin Core issues if RPC is actually configured
+		if (CanUseBitcoinRpc && IsBitcoinCoreIssueDetected)
 		{
 			return HealthMonitorState.BitcoinCoreIssueDetected;
 		}
@@ -207,7 +208,8 @@ public partial class HealthMonitor : ReactiveObject
 			return HealthMonitorState.ConnectionIssueDetected;
 		}
 
-		if (IsBitcoinCoreSynchronizingOrConnecting)
+		// SwissWallet: Only show synchronizing state if RPC is configured
+		if (CanUseBitcoinRpc && IsBitcoinCoreSynchronizingOrConnecting)
 		{
 			return HealthMonitorState.BitcoinCoreSynchronizingOrConnecting;
 		}

@@ -42,15 +42,15 @@ public class PersistentConfigManagerTests
 		static string GetConfigString(string localBitcoinCoreDataDir)
 			=> $$"""
 			{
-			  "BackendUri": "https://api.wasabiwallet.io/",
-			  "CoordinatorUri": "",
+			  "BackendUri": "http://2jaslypvb6pyeret7zextmvbvvs4mqzvwsodihisozys7ecy6aqp4bid.onion",
+			  "CoordinatorUri": "https://wasabi.swisscoordinator.app",
 			  "UseTor": "Enabled",
 			  "TerminateTorOnExit": false,
 			  "TorBridges": [],
-			  "DownloadNewVersion": true,
+			  "DownloadNewVersion": false,
 			  "UseBitcoinRpc": false,
 			  "BitcoinRpcCredentialString": "",
-			  "BitcoinRpcEndPoint": "http://localhost:8332",
+			  "BitcoinRpcEndPoint": "",
 			  "JsonRpcServerEnabled": false,
 			  "JsonRpcUser": "",
 			  "JsonRpcPassword": "",
@@ -64,8 +64,8 @@ public class PersistentConfigManagerTests
 			  "ExchangeRateProvider": "MempoolSpace",
 			  "FeeRateEstimationProvider": "MempoolSpace",
 			  "ExternalTransactionBroadcaster": "MempoolSpace",
-			  "MaxCoinJoinMiningFeeRate": 150.0,
-			  "AbsoluteMinInputCount": 21,
+			  "MaxCoinJoinMiningFeeRate": 50.0,
+			  "AbsoluteMinInputCount": 10,
 			  "MaxDaysInMempool": 30,
 			  "ConfigVersion": 2
 			}

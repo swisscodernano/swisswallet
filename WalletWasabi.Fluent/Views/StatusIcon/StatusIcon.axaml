@@ -145,6 +145,7 @@
                 <PathIcon Data="{StaticResource entities_regular}" />
               </StatusItem.Icon>
             </StatusItem>
+            <!-- Bitcoin RPC Status - Only show when actually configured and enabled -->
             <StatusItem
               Title="Bitcoin RPC"
               StatusText="{Binding HealthMonitor.BitcoinRpcStatus, Converter={x:Static converters:StatusConverters.RpcStatusStringConverter}}"

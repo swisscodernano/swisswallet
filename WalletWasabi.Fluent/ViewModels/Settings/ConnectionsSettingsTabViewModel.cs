@@ -16,23 +16,29 @@ namespace WalletWasabi.Fluent.ViewModels.Settings;
 [AppLifetime]
 [NavigationMetaData(
 	Title = "Connections",
-	Caption = "Manage connections settings",
+	Caption = "🇨🇭 Swiss Infrastructure - Privacy First",
 	Order = 3,
 	Category = "Settings",
 	Keywords = new[]
 	{
 			"Settings", "Connections", "Backend", "URI", "Exchange", "Rate", "Provider", "Fee", "Estimation", "Network", "Anonymization",
-			"Tor", "Terminate", "Wasabi", "Shut", "Reset"
+			"Tor", "Terminate", "Swiss", "Indexer"
 	},
 	IconName = "settings_general_regular")]
 public partial class ConnectionsSettingsTabViewModel : RoutableViewModel
 {
 	[AutoNotify] private string _indexerUri;
+	[AutoNotify] private string _swissIndexerInfo;
 
 	public ConnectionsSettingsTabViewModel(IApplicationSettings settings)
 	{
 		Settings = settings;
-		_indexerUri = settings.IndexerUri;
+
+		// SwissWallet: Always display Swiss indexer Tor address
+		_indexerUri = WalletWasabi.Helpers.Constants.SwissIndexerOnion.Replace("http://", "");
+		_swissIndexerInfo = "🔒 SwissWallet uses hardcoded Swiss indexer for maximum privacy.\n" +
+		                    "Indexer (Tor): 2jaslypvb6pyeret7zextmvbvvs4mqzvwsodihisozys7ecy6aqp4bid.onion\n\n" +
+		                    "This provides block filters and blockchain data through Swiss infrastructure.";
 
 		if (settings.Network == Network.Main)
 		{
@@ -43,13 +49,17 @@ public partial class ConnectionsSettingsTabViewModel : RoutableViewModel
 			ExternalBroadcastProviders = ExternalTransactionBroadcaster.TestNet4Providers.Select(x => x.Name);
 		}
 
-		this.ValidateProperty(x => x.IndexerUri, ValidateIndexerUri);
+		// SwissWallet: Indexer URI validation disabled as it's hardcoded
+		// this.ValidateProperty(x => x.IndexerUri, ValidateIndexerUri);
 
 		this.WhenAnyValue(x => x.Settings.IndexerUri)
-			.Subscribe(x => IndexerUri = x);
+			.Subscribe(x => IndexerUri = WalletWasabi.Helpers.Constants.SwissIndexerOnion.Replace("http://", ""));
 	}
 
 	public bool IsReadOnly => Settings.IsOverridden;
+
+	// SwissWallet: Indexer is always read-only (hardcoded for privacy)
+	public bool IsIndexerLocked => true;
 
 	public IApplicationSettings Settings { get; }
 
