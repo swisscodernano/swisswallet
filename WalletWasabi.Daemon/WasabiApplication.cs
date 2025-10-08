@@ -215,10 +215,12 @@ public class WasabiApplication
 		// SwissWallet: Migrate old Wasabi default values to new Swiss defaults
 		// Old Wasabi: MaxCoinJoinMiningFeeRate=1500, AbsoluteMinInputCount=21
 		// New Swiss: MaxCoinJoinMiningFeeRate=50, AbsoluteMinInputCount=10
-		if (persistentConfig.MaxCoinJoinMiningFeeRate == 1500m && persistentConfig.AbsoluteMinInputCount == 21)
+		if (persistentConfig is PersistentConfig currentConfig &&
+			currentConfig.MaxCoinJoinMiningFeeRate == 1500m &&
+			currentConfig.AbsoluteMinInputCount == 21)
 		{
 			Logger.LogInfo("🇨🇭 SwissWallet: Migrating old Wasabi defaults to Swiss defaults (1500→50 sat/vB, 21→10 inputs)");
-			var updatedConfig = persistentConfig with
+			var updatedConfig = currentConfig with
 			{
 				MaxCoinJoinMiningFeeRate = Constants.DefaultMaxCoinJoinMiningFeeRate,
 				AbsoluteMinInputCount = Constants.DefaultAbsoluteMinInputCount
