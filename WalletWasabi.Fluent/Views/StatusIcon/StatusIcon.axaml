@@ -227,13 +227,12 @@
       VerticalAlignment="Center" HorizontalAlignment="Right"
       Classes.blink="{Binding $self.IsVisible}" />
 
-    <!-- Bitcoin Core Connection issue -->
+    <!-- Bitcoin Core Connection info - SwissWallet: Info icon instead of warning -->
     <PathIcon
       IsVisible="{Binding HealthMonitor.State, Converter={x:Static converters:HealthMonitorStateVisibilityConverter.Instance}, ConverterParameter={x:Static models:HealthMonitorState.BitcoinCoreIssueDetected}}"
-      Data="{StaticResource warning_circle}"
-      Foreground="Goldenrod"
-      VerticalAlignment="Center" HorizontalAlignment="Right"
-      Classes.blink="{Binding $self.IsVisible}" />
+      Data="{StaticResource info_regular}"
+      Foreground="{DynamicResource SystemAccentColor}"
+      VerticalAlignment="Center" HorizontalAlignment="Right" />
 
     <!--Critical update available-->
     <PathIcon
