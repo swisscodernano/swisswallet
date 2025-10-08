@@ -1,11 +1,11 @@
 ### _[SwissWallet](https://swisscoordinator.app) is a privacy-focused, open-source, non-custodial Bitcoin wallet with Swiss sovereignty._
 
 # Download
-:window: [Windows](https://github.com/WalletWasabi/WalletWasabi/releases/download/v{version}/Wasabi-{version}.msi)
-:green_apple: [Apple M1/M2](https://github.com/WalletWasabi/WalletWasabi/releases/download/v{version}/Wasabi-{version}-arm64.dmg)
-:apple: [Apple Intel](https://github.com/WalletWasabi/WalletWasabi/releases/download/v{version}/Wasabi-{version}.dmg)
-:penguin: [Ubuntu / Debian](https://github.com/WalletWasabi/WalletWasabi/releases/download/v{version}/Wasabi-{version}.deb)
-:penguin: [Other Linux](https://github.com/WalletWasabi/WalletWasabi/releases/download/v{version}/Wasabi-{version}-linux-x64.tar.gz)
+:window: [Windows x64](https://github.com/swisscodernano/swisswallet/releases/download/v{version}/SwissWallet-win-x64.zip)
+:green_apple: [macOS ARM64 (M1/M2/M3)](https://github.com/swisscodernano/swisswallet/releases/download/v{version}/SwissWallet-macOS-arm64.dmg)
+:apple: [macOS x64 (Intel)](https://github.com/swisscodernano/swisswallet/releases/download/v{version}/SwissWallet-macOS-x64.dmg)
+:penguin: [Linux x64](https://github.com/swisscodernano/swisswallet/releases/download/v{version}/SwissWallet-linux-x64.tar.gz)
+:penguin: [Debian Package](https://github.com/swisscodernano/swisswallet/releases/download/v{version}/SwissWallet-linux-x64.deb)
 
 ---
 
@@ -14,7 +14,7 @@
 ---
 
 ## Installation Guide
-Download the operating system relevant software package and install Wasabi like you would with any other software on your computer.
+Download the operating system relevant software package and install SwissWallet like you would with any other software on your computer.
 For a detailed installation guide, including **signature verification**, see [the documentation](https://github.com/swisscodernano/swisswallet/tree/master/docs).
 
 ## Documentation
@@ -26,7 +26,7 @@ For a detailed installation guide, including **signature verification**, see [th
 ## Advanced Guide
 If you want to build or update SwissWallet from source code, check out [these easy instructions](https://github.com/swisscodernano/swisswallet/blob/master/docs/build/BUILD_QUICK_START.md).
 
-Wasabi uses [reproducible builds](https://reproducible-builds.org/), which you can verify with [this guide](https://github.com/WalletWasabi/WalletWasabi/blob/master/WalletWasabi.Documentation/Guides/DeterministicBuildGuide.md).
+SwissWallet uses [reproducible builds](https://reproducible-builds.org/), which you can verify with [this guide](https://github.com/swisscodernano/swisswallet/blob/master/WalletWasabi.Documentation/Guides/DeterministicBuildGuide.md).
 
 ## Requirements
 - Windows 10 1607+

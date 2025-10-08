@@ -66,4 +66,4 @@ Wasabi Daemon 2.0.3.0
 
 ### Usage
 
-To interact with the daemon, use the [RPC server](https://docs.wasabiwallet.io/using-wasabi/RPC.html) or the [wcli script](https://github.com/WalletWasabi/WalletWasabi/tree/master/Contrib/CLI).
+To interact with the daemon, use the [RPC server](https://github.com/swisscodernano/swisswallet/blob/master/docs/RPC.md) or the [wcli script](https://github.com/swisscodernano/swisswallet/tree/master/Contrib/CLI).
