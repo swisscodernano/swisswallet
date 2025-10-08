@@ -211,6 +211,20 @@ public class WasabiApplication
 			var mainnetConfigFilePath = Path.Combine(Config.DataDir, "Config.json");
 			PersistentConfigManager.ToFile(mainnetConfigFilePath, mainConfig);
 		}
+
+		// SwissWallet: Migrate old Wasabi default values to new Swiss defaults
+		// Old Wasabi: MaxCoinJoinMiningFeeRate=1500, AbsoluteMinInputCount=21
+		// New Swiss: MaxCoinJoinMiningFeeRate=50, AbsoluteMinInputCount=10
+		if (persistentConfig.MaxCoinJoinMiningFeeRate == 1500m && persistentConfig.AbsoluteMinInputCount == 21)
+		{
+			Logger.LogInfo("🇨🇭 SwissWallet: Migrating old Wasabi defaults to Swiss defaults (1500→50 sat/vB, 21→10 inputs)");
+			var updatedConfig = persistentConfig with
+			{
+				MaxCoinJoinMiningFeeRate = Constants.DefaultMaxCoinJoinMiningFeeRate,
+				AbsoluteMinInputCount = Constants.DefaultAbsoluteMinInputCount
+			};
+			PersistentConfigManager.ToFile(configFilePath, updatedConfig);
+		}
 	}
 
 	private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)

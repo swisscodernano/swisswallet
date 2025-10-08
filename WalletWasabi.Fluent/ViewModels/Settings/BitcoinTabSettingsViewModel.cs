@@ -49,6 +49,12 @@ public partial class BitcoinTabSettingsViewModel : RoutableViewModel
 		// this.WhenAnyValue(x => x.Settings.BitcoinRpcCredentialString)
 		//	.Subscribe(x => BitcoinRpcCredentialString = x);
 
+		// SwissWallet: Save credentials immediately when user types valid format
+		this.WhenAnyValue(x => x.BitcoinRpcCredentialString)
+			.Where(x => !string.IsNullOrWhiteSpace(x))
+			.Where(x => RPCCredentialString.TryParse(x, out _))
+			.Subscribe(x => Settings.BitcoinRpcCredentialString = x);
+
 		this.WhenAnyValue(x => x.Settings.DustThreshold)
 			.Subscribe(x => DustThreshold = x);
 	}

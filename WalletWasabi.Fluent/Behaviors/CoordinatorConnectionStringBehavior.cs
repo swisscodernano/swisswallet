@@ -14,6 +14,12 @@ public class CoordinatorConnectionStringBehavior : DisposingBehavior<Window>
 {
 	protected override IDisposable OnAttachedOverride()
 	{
+		// SwissWallet: Coordinator is hardcoded for security - disable connection string detection
+		// This prevents users from accidentally overriding the Swiss coordinator settings
+		return Disposable.Empty;
+
+		// Original Wasabi code disabled for SwissWallet:
+		/*
 		if (AssociatedObject is null)
 		{
 			return Disposable.Empty;
@@ -66,5 +72,6 @@ public class CoordinatorConnectionStringBehavior : DisposingBehavior<Window>
 				}
 			})
 			.Subscribe();
+		*/
 	}
 }
