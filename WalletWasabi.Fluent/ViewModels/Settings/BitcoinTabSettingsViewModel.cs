@@ -76,7 +76,14 @@ public partial class BitcoinTabSettingsViewModel : RoutableViewModel
 
 	private void ValidateBitcoinRpcCredentialString(IValidationErrors errors)
 	{
-		if (string.IsNullOrWhiteSpace(BitcoinRpcCredentialString) || RPCCredentialString.TryParse(BitcoinRpcCredentialString, out _))
+		// SwissWallet: Only save if user entered new credentials (field is not empty)
+		if (string.IsNullOrWhiteSpace(BitcoinRpcCredentialString))
+		{
+			// Empty field = user hasn't entered anything, don't overwrite existing credentials
+			return;
+		}
+
+		if (RPCCredentialString.TryParse(BitcoinRpcCredentialString, out _))
 		{
 			Settings.BitcoinRpcCredentialString = BitcoinRpcCredentialString;
 		}
