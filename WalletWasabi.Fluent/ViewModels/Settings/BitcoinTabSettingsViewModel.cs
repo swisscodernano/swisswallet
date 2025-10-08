@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reactive.Linq;
 using NBitcoin;
 using NBitcoin.RPC;
 using ReactiveUI;
