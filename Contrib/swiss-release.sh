@@ -130,6 +130,9 @@ for PLATFORM in "${PLATFORMS[@]}"; do
   for PROJECT in "${PROJECTS_TO_BUILD[@]}"; do
     echo "   📦 Building project: $PROJECT"
 
+    # Clean previous builds to ensure fresh compilation
+    dotnet clean $PROJECT --configuration Release
+
     # Build dotnet application
     dotnet restore $PROJECT --locked-mode
     dotnet publish $PROJECT \
