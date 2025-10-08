@@ -93,12 +93,18 @@ We forked Wasabi Wallet to provide Swiss citizens (and privacy-conscious global 
 
 ### macOS
 ```bash
-# Download and install
+# 1. Download and install
 open SwissWallet-macOS-arm64.dmg
 
-# Drag SwissWallet.app to Applications
-# Launch from Applications folder
+# 2. Drag SwissWallet.app to Applications
+
+# 3. First launch: Bypass Gatekeeper (app not yet code-signed)
+# Right-click SwissWallet.app → Open → Click "Open"
+# OR run in Terminal:
+xattr -cr /Applications/SwissWallet.app
 ```
+
+**Note:** Future releases will be code-signed to eliminate this step. See [docs/MACOS_CODE_SIGNING.md](docs/MACOS_CODE_SIGNING.md)
 
 ### Windows
 ```bash
@@ -132,6 +138,7 @@ cd SwissWallet-linux-x64
 ### Developer Documentation
 - **[Build Instructions](docs/build/BUILD_QUICK_START.md)** — Compile from source
 - **[Build System](docs/build/SWISSWALLET_BUILD_SYSTEM.md)** — Multi-platform build process
+- **[macOS Code Signing](docs/MACOS_CODE_SIGNING.md)** — Eliminate Gatekeeper warnings
 - **[Contributing Guide](CONTRIBUTING.md)** — How to contribute
 
 ### Technical Specifications
