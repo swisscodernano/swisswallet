@@ -8,17 +8,17 @@ SwissWallet is a privacy-focused Bitcoin wallet forked from Wasabi Wallet. It fe
 
 ## IMPORTANT: Repository Structure
 
-**Working Directory:** `/home/swisswallet/swisswallet-bitcoin/` (or symlink `/home/swisswallet/swisswallet/`)
+**Working Directory:** `/home/swisswallet/swisswallet/`
 
-Both paths point to the same directory:
-- `/home/swisswallet/swisswallet/` is a symlink to `/home/swisswallet/swisswallet-bitcoin/`
-- `/home/swisswallet/swisswallet-bitcoin/` is the actual repository directory
+This is the single repository directory for all SwissWallet development:
+- `/home/swisswallet/swisswallet/` - Main repository directory
 - Always work in this directory for all development tasks
+- No symlinks, no duplicates - clean and simple structure
 
 **Git Remote:** `git@github.com-swisswallet-bitcoin:swisscodernano/swisswallet.git`
 **GitHub Repository:** `github.com/swisscodernano/swisswallet`
 
-All commits should be made to `/home/swisswallet/swisswallet-bitcoin/` (or its symlink `/home/swisswallet/swisswallet/`).
+All commits should be made to `/home/swisswallet/swisswallet/`.
 
 **Key Coordinators:**
 - Primary (Tor): `rhuvjl2kosdi3xgnmkr4bwnvpmlsvupajkubuazxendgtorvi2q4nhyd.onion`
