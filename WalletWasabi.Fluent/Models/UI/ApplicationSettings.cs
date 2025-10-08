@@ -262,7 +262,14 @@ public partial class ApplicationSettings : ReactiveObject
 		// Bitcoin
 		if (Uri.TryCreate(BitcoinRpcUri, UriKind.Absolute, out var uri))
 		{
-			result = result with { BitcoinRpcUri = uri.ToString(), BitcoinRpcCredentialString = BitcoinRpcCredentialString};
+			result = result with { BitcoinRpcUri = uri.ToString() };
+		}
+
+		// SwissWallet: Save RPC credentials independently from URI validation
+		// This allows credentials to be saved even if URI is empty/invalid
+		if (!string.IsNullOrWhiteSpace(BitcoinRpcCredentialString))
+		{
+			result = result with { BitcoinRpcCredentialString = BitcoinRpcCredentialString };
 		}
 
 		result = result with { CoordinatorUri = CoordinatorUri };

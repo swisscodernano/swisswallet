@@ -80,11 +80,14 @@ public partial class BitcoinTabSettingsViewModel : RoutableViewModel
 		if (string.IsNullOrWhiteSpace(BitcoinRpcCredentialString))
 		{
 			// Empty field = user hasn't entered anything, don't overwrite existing credentials
+			// DO NOT clear existing saved credentials
 			return;
 		}
 
+		// User entered something, validate and save it
 		if (RPCCredentialString.TryParse(BitcoinRpcCredentialString, out _))
 		{
+			// Valid credentials format, save them
 			Settings.BitcoinRpcCredentialString = BitcoinRpcCredentialString;
 		}
 		else
