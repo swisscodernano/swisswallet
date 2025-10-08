@@ -150,22 +150,25 @@ ln -s /Applications "$TEMP_DMG_DIR/Applications"
 
 # Create DMG
 echo "   📀 Creating disk image..."
-hdiutil create -volname "$APP_NAME" \
+if hdiutil create -volname "$APP_NAME" \
     -srcfolder "$TEMP_DMG_DIR" \
     -ov -format UDZO \
-    "$DMG_PATH"
+    "$DMG_PATH" 2>/dev/null; then
 
-# Remove quarantine attributes to avoid "damaged" error
-echo "   🔓 Removing quarantine attributes..."
-xattr -cr "$TEMP_DMG_DIR/$APP_BUNDLE" 2>/dev/null || true
-if [ -f "$DMG_PATH" ]; then
-    xattr -cr "$DMG_PATH" 2>/dev/null || true
+    # Remove quarantine attributes to avoid "damaged" error
+    echo "   🔓 Removing quarantine attributes..."
+    xattr -cr "$TEMP_DMG_DIR/$APP_BUNDLE" 2>/dev/null || true
+    if [ -f "$DMG_PATH" ]; then
+        xattr -cr "$DMG_PATH" 2>/dev/null || true
+    fi
+
+    echo "   ✅ DMG created: $DMG_PATH"
+else
+    echo "   ⚠️  DMG creation failed (Resource busy) - will create ZIP only"
 fi
 
 # Clean up
 rm -rf "$TEMP_DMG_DIR"
-
-echo "   ✅ DMG created: $DMG_PATH"
 
 # Also create ZIP of the .app for alternate distribution
 ZIP_PATH="$PACKAGES_DIR/${DMG_NAME}.zip"

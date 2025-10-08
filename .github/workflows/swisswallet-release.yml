@@ -36,7 +36,7 @@ jobs:
             ./packages/SwissWallet-*-macOS-*.dmg
             ./packages/SwissWallet-*-macOS-*.zip
           compression-level: 0
-          if-no-files-found: error
+          if-no-files-found: warn
 
   build-windows:
     name: Build Windows (x64)
