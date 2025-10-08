@@ -33,7 +33,9 @@
     <DockPanel IsVisible="{Binding Settings.UseBitcoinRpc}">
       <TextBlock Text="Bitcoin RPC Credential String" />
       <TextBox Text="{Binding BitcoinRpcCredentialString}"
-               Watermark="(rpcuser:rpcpassword or cookie file)"/>
+               Watermark="(rpcuser:rpcpassword or cookie file)"
+               PasswordChar="•"
+               RevealPassword="False"/>
     </DockPanel>
 
     <DockPanel ToolTip.Tip="Payments (from others) below this value won't appear if you have already received coins to the same address.">

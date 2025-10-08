@@ -38,14 +38,16 @@ public partial class BitcoinTabSettingsViewModel : RoutableViewModel
 		this.ValidateProperty(x => x.DustThreshold, ValidateDustThreshold);
 
 		_bitcoinRpcUri = settings.BitcoinRpcUri;
-		_bitcoinRpcCredentialString = settings.BitcoinRpcCredentialString;
+		// SwissWallet: NEVER show saved RPC credentials in UI for security
+		_bitcoinRpcCredentialString = string.Empty;
 		_dustThreshold = settings.DustThreshold;
 
 		this.WhenAnyValue(x => x.Settings.BitcoinRpcUri)
 			.Subscribe(x => BitcoinRpcUri = x);
 
-		this.WhenAnyValue(x => x.Settings.BitcoinRpcCredentialString)
-			.Subscribe(x => BitcoinRpcCredentialString = x);
+		// SwissWallet: Never update UI with saved credentials - force re-entry for security
+		// this.WhenAnyValue(x => x.Settings.BitcoinRpcCredentialString)
+		//	.Subscribe(x => BitcoinRpcCredentialString = x);
 
 		this.WhenAnyValue(x => x.Settings.DustThreshold)
 			.Subscribe(x => DustThreshold = x);
