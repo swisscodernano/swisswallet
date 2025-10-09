@@ -1,0 +1,20 @@
+      <!-- Swiss Logo: Red background with white cross -->
+      <DrawingImage x:Key="wasabi_logo_dynamic">
+        <DrawingGroup>
+          <GeometryDrawing Brush="#DC143C" Geometry="M0,0 L512,0 L512,512 L0,512 Z" />
+          <!-- Vertical bar of cross -->
+          <GeometryDrawing Brush="#FFFFFF" Geometry="M205,154 L307,154 L307,358 L205,358 Z" />
+          <!-- Horizontal bar of cross -->
+          <GeometryDrawing Brush="#FFFFFF" Geometry="M154,205 L358,205 L358,307 L154,307 Z" />
+        </DrawingGroup>
+      </DrawingImage>
+
+      <!-- Swiss Text Logo -->
+      <ControlTemplate x:Key="wasabi_logo_text_dynamic">
+        <StackPanel Margin="0,0,0,-5" TextElement.FontFamily="{StaticResource WasabiLogoTextFont}"
+                    TextElement.FontWeight="Light" Orientation="Horizontal" ClipToBounds="False">
+          <TextBlock Text="SWISS" Classes="h6" Foreground="{DynamicResource TextForegroundColor}" ClipToBounds="False" />
+          <TextBlock Text="." Classes="h6" Foreground="#DC143C" ClipToBounds="False" />
+          <TextBlock Text="WALLET" Classes="h6" Foreground="{DynamicResource TextForegroundColor}" ClipToBounds="False" />
+        </StackPanel>
+      </ControlTemplate>
