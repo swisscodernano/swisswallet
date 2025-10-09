@@ -39,20 +39,30 @@ public partial class BitcoinTabSettingsViewModel : RoutableViewModel
 		this.ValidateProperty(x => x.DustThreshold, ValidateDustThreshold);
 
 		_bitcoinRpcUri = settings.BitcoinRpcUri;
-		// SwissWallet: NEVER show saved RPC credentials in UI for security
-		_bitcoinRpcCredentialString = string.Empty;
+		// SwissWallet: Show masked credentials (***) if saved, like Wasabi does
+		_bitcoinRpcCredentialString = string.IsNullOrEmpty(settings.BitcoinRpcCredentialString)
+			? string.Empty
+			: new string('*', 30);
 		_dustThreshold = settings.DustThreshold;
 
 		this.WhenAnyValue(x => x.Settings.BitcoinRpcUri)
 			.Subscribe(x => BitcoinRpcUri = x);
 
-		// SwissWallet: Never update UI with saved credentials - force re-entry for security
-		// this.WhenAnyValue(x => x.Settings.BitcoinRpcCredentialString)
-		//	.Subscribe(x => BitcoinRpcCredentialString = x);
+		// SwissWallet: Show masked credentials when settings update
+		this.WhenAnyValue(x => x.Settings.BitcoinRpcCredentialString)
+			.Subscribe(x =>
+			{
+				if (!string.IsNullOrEmpty(x) && BitcoinRpcCredentialString != x)
+				{
+					BitcoinRpcCredentialString = new string('*', 30);
+				}
+			});
 
 		// SwissWallet: Save credentials immediately when user types valid format
+		// BUT don't save if it's the masked placeholder (****)
 		this.WhenAnyValue(x => x.BitcoinRpcCredentialString)
 			.Where(x => !string.IsNullOrWhiteSpace(x))
+			.Where(x => !x.All(c => c == '*')) // Skip if all asterisks (masked placeholder)
 			.Where(x => RPCCredentialString.TryParse(x, out _))
 			.Subscribe(x => Settings.BitcoinRpcCredentialString = x);
 
