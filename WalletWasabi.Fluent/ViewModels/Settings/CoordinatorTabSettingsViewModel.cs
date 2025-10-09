@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using ReactiveUI;
 using WalletWasabi.Fluent.Extensions;
