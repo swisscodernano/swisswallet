@@ -212,20 +212,33 @@ public class WasabiApplication
 			PersistentConfigManager.ToFile(mainnetConfigFilePath, mainConfig);
 		}
 
-		// SwissWallet: Migrate old Wasabi default values to new Swiss defaults
+		// SwissWallet: Migrate individual old Wasabi defaults to new Swiss defaults
 		// Old Wasabi: MaxCoinJoinMiningFeeRate=1500, AbsoluteMinInputCount=21
 		// New Swiss: MaxCoinJoinMiningFeeRate=50, AbsoluteMinInputCount=10
-		if (persistentConfig is PersistentConfig currentConfig &&
-			currentConfig.MaxCoinJoinMiningFeeRate == 1500m &&
-			currentConfig.AbsoluteMinInputCount == 21)
+		// NOTE: Check each value independently to handle partial user modifications
+		if (persistentConfig is PersistentConfig currentConfig)
 		{
-			Logger.LogInfo("🇨🇭 SwissWallet: Migrating old Wasabi defaults to Swiss defaults (1500→50 sat/vB, 21→10 inputs)");
-			var updatedConfig = currentConfig with
+			bool needsMigration = false;
+			var updatedConfig = currentConfig;
+
+			if (currentConfig.MaxCoinJoinMiningFeeRate == 1500m)
 			{
-				MaxCoinJoinMiningFeeRate = Constants.DefaultMaxCoinJoinMiningFeeRate,
-				AbsoluteMinInputCount = Constants.DefaultAbsoluteMinInputCount
-			};
-			PersistentConfigManager.ToFile(configFilePath, updatedConfig);
+				Logger.LogInfo("🇨🇭 SwissWallet: Migrating MaxCoinJoinMiningFeeRate (1500→50 sat/vB)");
+				updatedConfig = updatedConfig with { MaxCoinJoinMiningFeeRate = Constants.DefaultMaxCoinJoinMiningFeeRate };
+				needsMigration = true;
+			}
+
+			if (currentConfig.AbsoluteMinInputCount == 21)
+			{
+				Logger.LogInfo("🇨🇭 SwissWallet: Migrating AbsoluteMinInputCount (21→10 inputs)");
+				updatedConfig = updatedConfig with { AbsoluteMinInputCount = Constants.DefaultAbsoluteMinInputCount };
+				needsMigration = true;
+			}
+
+			if (needsMigration)
+			{
+				PersistentConfigManager.ToFile(configFilePath, updatedConfig);
+			}
 		}
 	}
 
