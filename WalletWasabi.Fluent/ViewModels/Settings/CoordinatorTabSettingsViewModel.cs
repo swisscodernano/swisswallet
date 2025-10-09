@@ -85,30 +85,24 @@ public partial class CoordinatorTabSettingsViewModel : RoutableViewModel
 				if (config is not null && config.IsValid)
 				{
 					// SwissWallet: Marshal to UI thread to prevent cross-thread crash
-					RxApp.MainThreadScheduler.Schedule(() =>
-					{
-						RecommendedFeeRateInfo = $"💡 Recommended: {config.RecommendedMiningFeeRate} sat/vB (from Swiss Coordinator)\n" +
-						                         $"   Valid range: {config.MinMiningFeeRate} - {config.MaxMiningFeeRate} sat/vB";
-					});
+					var feeInfo = $"💡 Recommended: {config.RecommendedMiningFeeRate} sat/vB (from Swiss Coordinator)\n" +
+					              $"   Valid range: {config.MinMiningFeeRate} - {config.MaxMiningFeeRate} sat/vB";
+					RxApp.MainThreadScheduler.Schedule(() => RecommendedFeeRateInfo = feeInfo);
 					return;
 				}
 			}
 
 			// Fallback if service not available or config fetch failed
 			// SwissWallet: Marshal to UI thread to prevent cross-thread crash
-			RxApp.MainThreadScheduler.Schedule(() =>
-			{
-				RecommendedFeeRateInfo = $"💡 Default: {Constants.DefaultMaxCoinJoinMiningFeeRate} sat/vB\n" +
-				                         $"   Range: 10 - 200 sat/vB";
-			});
+			var defaultInfo = $"💡 Default: {Constants.DefaultMaxCoinJoinMiningFeeRate} sat/vB\n" +
+			                  $"   Range: 10 - 200 sat/vB";
+			RxApp.MainThreadScheduler.Schedule(() => RecommendedFeeRateInfo = defaultInfo);
 		}
 		catch
 		{
 			// SwissWallet: Marshal to UI thread to prevent cross-thread crash
-			RxApp.MainThreadScheduler.Schedule(() =>
-			{
-				RecommendedFeeRateInfo = $"💡 Default: {Constants.DefaultMaxCoinJoinMiningFeeRate} sat/vB";
-			});
+			var errorInfo = $"💡 Default: {Constants.DefaultMaxCoinJoinMiningFeeRate} sat/vB";
+			RxApp.MainThreadScheduler.Schedule(() => RecommendedFeeRateInfo = errorInfo);
 		}
 	}
 
