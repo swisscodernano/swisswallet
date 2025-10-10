@@ -89,7 +89,7 @@
 
     <DockPanel ToolTip.Tip="Coinjoin will automatically stop if the confirmed wallet balance is below this.">
       <TextBlock Text="Stop coinjoin threshold" />
-      <CurrencyEntryBox Classes="standalone" Text="{Binding PlebStopThreshold, Mode=TwoWay}" CurrencyCode="BTC" />
+      <CurrencyEntryBox Classes="standalone" Text="{Binding PlebStopThreshold, Mode=TwoWay}" CurrencyCode="BTC" IsReadOnly="False" />
     </DockPanel>
   </StackPanel>
 </UserControl>
