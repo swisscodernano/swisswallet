@@ -74,20 +74,32 @@ public class CoinJoinClient
 	private async Task<RoundState> WaitForRoundAsync(uint256 excludeRound, CancellationToken token)
 	{
 		CoinJoinClientProgress.SafeInvoke(this, new WaitingForRound());
+		Logger.LogInfo($"⏳ Waiting for suitable CoinJoin round from coordinator (max wait: {_maxWaitingTimeForRound.TotalMinutes} minutes)...");
 
 		using CancellationTokenSource cts = new(_maxWaitingTimeForRound);
 		using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(token, cts.Token);
 
-		return await _roundStatusProvider
-			.CreateRoundAwaiterAsync(
-				roundState =>
-					roundState.InputRegistrationEnd - DateTimeOffset.UtcNow > _doNotRegisterInLastMinuteTimeLimit
-					&& roundState.CoinjoinState.Parameters.AllowedOutputAmounts.Min < MinimumOutputAmountSanity
-					&& roundState.Phase == Phase.InputRegistration
-					&& !roundState.IsBlame
-					&& roundState.Id != excludeRound,
-				linkedCts.Token)
-			.ConfigureAwait(false);
+		try
+		{
+			var roundState = await _roundStatusProvider
+				.CreateRoundAwaiterAsync(
+					roundState =>
+						roundState.InputRegistrationEnd - DateTimeOffset.UtcNow > _doNotRegisterInLastMinuteTimeLimit
+						&& roundState.CoinjoinState.Parameters.AllowedOutputAmounts.Min < MinimumOutputAmountSanity
+						&& roundState.Phase == Phase.InputRegistration
+						&& !roundState.IsBlame
+						&& roundState.Id != excludeRound,
+					linkedCts.Token)
+				.ConfigureAwait(false);
+
+			Logger.LogInfo($"✅ Found suitable round {roundState.Id} in phase {roundState.Phase}");
+			return roundState;
+		}
+		catch (OperationCanceledException) when (cts.IsCancellationRequested)
+		{
+			Logger.LogWarning($"⏱️ Timeout: No suitable CoinJoin round found after {_maxWaitingTimeForRound.TotalMinutes} minutes");
+			throw;
+		}
 	}
 
 	private async Task<RoundState> WaitForBlameRoundAsync(uint256 blameRoundId, CancellationToken token)
