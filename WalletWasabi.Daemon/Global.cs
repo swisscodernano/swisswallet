@@ -486,6 +486,11 @@ public class Global
 
 	private void RegisterCoinJoinComponents(Uri coordinatorUri)
 	{
+		// SwissWallet: Diagnostic logging for coordinator connectivity
+		Logger.LogInfo($"🇨🇭 Registering CoinJoin components for coordinator: {coordinatorUri}");
+		Logger.LogInfo($"🔐 Tor Mode: {Config.UseTor}");
+		Logger.LogInfo($"🌐 SOCKS5 Proxy: {TorSettings.SocksEndpoint.ToUri("socks5")}");
+
 		var prisonForCoordinator = Path.Combine(DataDir, coordinatorUri.Host);
 		_coinPrison = CoinPrison.CreateOrLoadFromFile(prisonForCoordinator);
 

@@ -27,7 +27,7 @@ namespace WalletWasabi.Blockchain.Keys;
 
 public class KeyManager
 {
-	public const bool DefaultAutoCoinjoin = false;
+	public const bool DefaultAutoCoinjoin = true; // SwissWallet: Auto-start CoinJoin by default
 	public const bool DefaultRedCoinIsolation = false;
 
 	public const int AbsoluteMinGapLimit = 21;
