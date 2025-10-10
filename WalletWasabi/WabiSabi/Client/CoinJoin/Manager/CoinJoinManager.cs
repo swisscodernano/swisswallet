@@ -199,7 +199,8 @@ public class CoinJoinManager : BackgroundService
 
 				if (IsUnderPlebStop(coinCandidates, walletToStart.PlebStopThreshold) && !startCommand.OverridePlebStop)
 				{
-					walletToStart.LogTrace("PlebStop preventing coinjoin.");
+					var confirmedBalance = Money.Satoshis(coinCandidates.Sum(x => x.Amount.Satoshi));
+					walletToStart.LogInfo($"⛔ PlebStop threshold active - Confirmed balance {confirmedBalance.ToDecimal(MoneyUnit.BTC):F8} BTC below threshold {walletToStart.PlebStopThreshold.ToDecimal(MoneyUnit.BTC):F8} BTC");
 
 					if(!IsUnderPlebStop(coinCandidates.Union(coinSelectionResult.UnconfirmedCoins).ToArray(), walletToStart.PlebStopThreshold))
 					{
@@ -215,13 +216,14 @@ public class CoinJoinManager : BackgroundService
 					// If all coins are already private, then don't mix.
 					if (await walletToStart.IsWalletPrivateAsync().ConfigureAwait(false))
 					{
-						walletToStart.LogTrace("All mixed!");
+						walletToStart.LogInfo("🎉 All coins are already private! Privacy percentage: 100%");
 						throw new CoinJoinClientException(CoinjoinError.AllCoinsPrivate);
 					}
 
 					// If all coin candidates are private it makes no sense to mix.
 					if (coinCandidates.All(x => x.IsPrivate(walletToStart.AnonScoreTarget)))
 					{
+						walletToStart.LogInfo($"⚠️ No coins eligible to mix - all candidates are already private (target anonymity score: {walletToStart.AnonScoreTarget})");
 						throw new CoinJoinClientException(
 							CoinjoinError.NoCoinsEligibleToMix,
 							$"All coin candidates are already private and {nameof(startCommand.StopWhenAllMixed)} was {startCommand.StopWhenAllMixed}");

@@ -100,8 +100,8 @@ public static class Constants
 
 	public static readonly Money MaximumNumberOfBitcoinsMoney = Money.Coins(MaximumNumberOfBitcoins);
 
-	public static readonly Version ClientVersion = new(3, 4, 1);
-	public static readonly string VersionName = "Swiss Debug Release";
+	public static readonly Version ClientVersion = new(3, 4, 2);
+	public static readonly string VersionName = "Swiss Enhanced Diagnostics";
 
 	public static readonly Version HwiVersion = new("3.1.0");
 
