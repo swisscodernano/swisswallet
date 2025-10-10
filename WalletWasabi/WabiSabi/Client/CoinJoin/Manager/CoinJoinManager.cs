@@ -623,6 +623,7 @@ private async Task<CoinSelectionResult> SelectCandidateCoinsAsync(IWallet wallet
 		}
 		else if (await wallet.IsWalletPrivateAsync().ConfigureAwait(false))
 		{
+			wallet.LogInfo("🎉 All coins are already private! No mixing needed.");
 			NotifyCoinJoinStartError(wallet, CoinjoinError.AllCoinsPrivate);
 			if (!finishedCoinJoin.StopWhenAllMixed)
 			{
@@ -639,6 +640,7 @@ private async Task<CoinSelectionResult> SelectCandidateCoinsAsync(IWallet wallet
 		{
 			// - If there was a CjClient exception, for example PlebStop or no coins to mix,
 			// Keep trying, so CJ starts automatically when the wallet becomes mixable again.
+			wallet.LogInfo($"❌ CoinJoin cannot start: {cjClientException.CoinjoinError} - {cjClientException.Message}");
 			ScheduleRestartAutomatically(wallet, trackedAutoStarts, finishedCoinJoin.StopWhenAllMixed, finishedCoinJoin.OverridePlebStop, finishedCoinJoin.OutputWallet, cancellationToken);
 			NotifyCoinJoinStartError(wallet, cjClientException.CoinjoinError);
 		}
