@@ -310,22 +310,37 @@ private record CoinSelectionResult(SmartCoin[] CandidateCoins, SmartCoin[] Banne
 
 private async Task<CoinSelectionResult> GetCoinSelectionAsync(IWallet wallet)
 {
-    var coinCandidates = new CoinsView(await wallet.GetCoinjoinCoinCandidatesAsync().ConfigureAwait(false))
-        .Available()
+    // SwissWallet: Log initial coin retrieval
+    var allCoinjoinCandidates = await wallet.GetCoinjoinCoinCandidatesAsync().ConfigureAwait(false);
+    Logger.LogInfo($"🪙 GetCoinjoinCoinCandidatesAsync returned {allCoinjoinCandidates.Count()} coins");
+
+    var availableView = new CoinsView(allCoinjoinCandidates).Available();
+    Logger.LogInfo($"🪙 After .Available() filter: {availableView.Count()} coins");
+
+    var coinCandidates = availableView
         .Where(x => !_coinRefrigerator.IsFrozen(x))
         .ToArray();
+    Logger.LogInfo($"🪙 After .IsFrozen() filter: {coinCandidates.Length} coins");
 
     if (coinCandidates.Length == 0)
     {
+        Logger.LogWarning($"⚠️ NO COIN CANDIDATES available for CoinJoin after initial filtering");
         return new CoinSelectionResult();
     }
 
     var bannedCoins = coinCandidates.Where(x => _coinPrison.IsBanned(x.Outpoint)).ToArray();
+    Logger.LogInfo($"🪙 Banned coins: {bannedCoins.Length}");
+
     var immatureCoins = _serverTipHeight > 0
 	    ? coinCandidates.Where(x => x.Transaction.IsImmature(_serverTipHeight)).ToArray()
 	    : [];
+    Logger.LogInfo($"🪙 Immature coins (coinbase < 101 conf): {immatureCoins.Length}");
+
     var unconfirmedCoins = coinCandidates.Where(x => !x.Confirmed).ToArray();
+    Logger.LogInfo($"🪙 Unconfirmed coins: {unconfirmedCoins.Length}");
+
     var excludedCoins = coinCandidates.Where(x => x.IsExcludedFromCoinJoin).ToArray();
+    Logger.LogInfo($"🪙 Manually excluded coins: {excludedCoins.Length}");
 
     var availableCoins = coinCandidates
         .Except(bannedCoins)
@@ -333,6 +348,18 @@ private async Task<CoinSelectionResult> GetCoinSelectionAsync(IWallet wallet)
         .Except(unconfirmedCoins)
         .Except(excludedCoins)
         .ToArray();
+
+    Logger.LogInfo($"✅ FINAL AVAILABLE COINS: {availableCoins.Length}/{coinCandidates.Length}");
+
+    if (availableCoins.Length == 0)
+    {
+        Logger.LogWarning($"⚠️ ZERO coins available after filtering - CoinJoin cannot proceed!");
+    }
+    else
+    {
+        var totalAmount = availableCoins.Sum(x => x.Amount.Satoshi);
+        Logger.LogInfo($"💰 Available amount: {totalAmount} sats in {availableCoins.Length} coins");
+    }
 
     return new CoinSelectionResult(
         availableCoins,
