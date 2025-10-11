@@ -100,8 +100,8 @@ public static class Constants
 
 	public static readonly Money MaximumNumberOfBitcoinsMoney = Money.Coins(MaximumNumberOfBitcoins);
 
-	public static readonly Version ClientVersion = new(3, 4, 5);
-	public static readonly string VersionName = "Swiss Tor Timeout Fix";
+	public static readonly Version ClientVersion = new(3, 4, 6);
+	public static readonly string VersionName = "Swiss Tor Timeout Fix v2";
 
 	public static readonly Version HwiVersion = new("3.1.0");
 

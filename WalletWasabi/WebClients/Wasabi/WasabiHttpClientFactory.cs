@@ -111,6 +111,15 @@ public class CoordinatorHttpClientFactory : IHttpClientFactory
 		httpClient.BaseAddress = _baseAddress;
 		httpClient.DefaultRequestVersion = HttpVersion.Version11;
 		httpClient.DefaultRequestHeaders.UserAgent.Clear();
+
+		// SwissWallet: Increased timeout for Tor onion services
+		// Onion services can be slow due to circuit establishment and rendezvous
+		// Default 100s is too short, increasing to 300s (5 minutes)
+		bool isOnionService = _baseAddress.Host.EndsWith(".onion");
+		httpClient.Timeout = isOnionService
+			? TimeSpan.FromSeconds(300) // 5 minutes for onion services
+			: TimeSpan.FromSeconds(120); // 2 minutes for clearnet
+
 		return httpClient;
 	}
 
