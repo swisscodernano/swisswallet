@@ -50,6 +50,15 @@ public class SwissCoordinatorHttpClientFactory : IHttpClientFactory
 		httpClient.DefaultRequestVersion = HttpVersion.Version11;
 		httpClient.DefaultRequestHeaders.UserAgent.Clear();
 
+		// SwissWallet: Increased timeout for Tor onion services
+		// Onion services can be slow due to circuit establishment and rendezvous
+		// Default 100s is too short, increasing to 300s (5 minutes)
+		httpClient.Timeout = _currentCoordinator.Type == CoordinatorType.OnionService
+			? TimeSpan.FromSeconds(300) // 5 minutes for onion services
+			: TimeSpan.FromSeconds(120); // 2 minutes for clearnet
+
+		Logger.LogDebug($"🇨🇭 HTTP client timeout set to {httpClient.Timeout.TotalSeconds}s for {_currentCoordinator.Type}");
+
 		// Add Swiss security headers
 		httpClient.DefaultRequestHeaders.Add("X-Swiss-Security", "enabled");
 		httpClient.DefaultRequestHeaders.Add("X-Coordinator-Type", _currentCoordinator.Type.ToString());

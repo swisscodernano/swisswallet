@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using WalletWasabi.Logging;
 using WalletWasabi.Services;
 using WalletWasabi.WabiSabi.Coordinator.PostRequests;
 using WalletWasabi.WabiSabi.Coordinator.Rounds;
@@ -97,12 +98,40 @@ public static class RoundStateUpdater
 		var request = new RoundStateRequest(
 			state.Rounds.Select(x => new RoundStateCheckpoint(x.Key, x.Value.CoinjoinState.Events.Count)).ToImmutableList());
 
-		using CancellationTokenSource timeoutCts = new(TimeSpan.FromSeconds(30));
+		// SwissWallet: Increased timeout for Tor onion services
+		// Original 30s timeout was too short for slow Tor circuits
+		// Increased to 180s (3 minutes) to accommodate onion service latency
+		using CancellationTokenSource timeoutCts = new(TimeSpan.FromSeconds(180));
 		using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeoutCts.Token);
 
-		var response = await arenaRequestHandler.GetStatusAsync(request, linkedCts.Token).ConfigureAwait(false);
-		RoundState[] roundStates = response.RoundStates;
+		var startTime = DateTimeOffset.UtcNow;
+		Logger.LogDebug($"🌐 Requesting round state from coordinator (timeout: 180s)...");
 
+		try
+		{
+			var response = await arenaRequestHandler.GetStatusAsync(request, linkedCts.Token).ConfigureAwait(false);
+			var elapsed = DateTimeOffset.UtcNow - startTime;
+			Logger.LogDebug($"✅ Round state received in {elapsed.TotalSeconds:F1}s ({response.RoundStates.Length} rounds)");
+			return ProcessRoundStates(state, response.RoundStates);
+		}
+		catch (TaskCanceledException) when (timeoutCts.IsCancellationRequested)
+		{
+			var elapsed = DateTimeOffset.UtcNow - startTime;
+			Logger.LogWarning($"⏱️ Round state request timeout after {elapsed.TotalSeconds:F1}s - coordinator not responding");
+			throw;
+		}
+		catch (Exception ex)
+		{
+			var elapsed = DateTimeOffset.UtcNow - startTime;
+			Logger.LogWarning($"❌ Round state request failed after {elapsed.TotalSeconds:F1}s: {ex.Message}");
+			throw;
+		}
+	}
+
+	private static (Dictionary<uint256, RoundState> Rounds, ImmutableList<RoundStateAwaiter> Awaiters) ProcessRoundStates(
+		RoundsState state,
+		RoundState[] roundStates)
+	{
 		var updatedRoundStates = roundStates
 			.Where(rs => state.Rounds.ContainsKey(rs.Id))
 			.Select(rs => (NewRoundState: rs, CurrentRoundState: state.Rounds[rs.Id]))
