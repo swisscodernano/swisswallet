@@ -105,13 +105,13 @@ public static class RoundStateUpdater
 		using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeoutCts.Token);
 
 		var startTime = DateTimeOffset.UtcNow;
-		Logger.LogDebug($"🌐 Requesting round state from coordinator (timeout: 180s)...");
+		Logger.LogInfo($"🌐 Requesting round state from coordinator (timeout: 180s)...");
 
 		try
 		{
 			var response = await arenaRequestHandler.GetStatusAsync(request, linkedCts.Token).ConfigureAwait(false);
 			var elapsed = DateTimeOffset.UtcNow - startTime;
-			Logger.LogDebug($"✅ Round state received in {elapsed.TotalSeconds:F1}s ({response.RoundStates.Length} rounds)");
+			Logger.LogInfo($"✅ Round state received in {elapsed.TotalSeconds:F1}s ({response.RoundStates.Length} rounds)");
 			return ProcessRoundStates(state, response.RoundStates);
 		}
 		catch (TaskCanceledException) when (timeoutCts.IsCancellationRequested)
