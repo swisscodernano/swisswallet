@@ -89,7 +89,8 @@ public class CoinJoinClient
 						var timeRemaining = roundState.InputRegistrationEnd - DateTimeOffset.UtcNow;
 						var minOutput = roundState.CoinjoinState.Parameters.AllowedOutputAmounts.Min;
 						var isTimeOk = timeRemaining > _doNotRegisterInLastMinuteTimeLimit;
-						var isMinOutputOk = minOutput < MinimumOutputAmountSanity;
+						// SwissWallet: Fixed boundary condition - accept rounds with MinOutput <= 10000 sats (not just <)
+						var isMinOutputOk = minOutput <= MinimumOutputAmountSanity;
 						var isPhaseOk = roundState.Phase == Phase.InputRegistration;
 						var isNotBlame = !roundState.IsBlame;
 						var isNotExcluded = roundState.Id != excludeRound;
@@ -101,7 +102,7 @@ public class CoinJoinClient
 						if (!isSuitable)
 						{
 							if (!isTimeOk) Logger.LogInfo($"  ❌ Not enough time remaining ({timeRemaining.TotalSeconds:F0}s < {_doNotRegisterInLastMinuteTimeLimit.TotalSeconds:F0}s required)");
-							if (!isMinOutputOk) Logger.LogInfo($"  ❌ Min output too high ({minOutput.Satoshi} >= {MinimumOutputAmountSanity.Satoshi} sats limit)");
+							if (!isMinOutputOk) Logger.LogInfo($"  ❌ Min output too high ({minOutput.Satoshi} > {MinimumOutputAmountSanity.Satoshi} sats limit)");
 							if (!isPhaseOk) Logger.LogInfo($"  ❌ Wrong phase ({roundState.Phase} != InputRegistration)");
 							if (!isNotBlame) Logger.LogInfo($"  ❌ Is blame round");
 							if (!isNotExcluded) Logger.LogInfo($"  ❌ Round excluded");
